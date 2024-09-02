@@ -29,6 +29,12 @@ body {
 
 .header__logo{
     margin: 0.5rem 0;
+    width: 200px;
+    height: 60px;
+}
+
+.header__logo:hover{
+    opacity: 0.6;
 }
 
 .header__title{
