@@ -11,7 +11,7 @@ body {
     flex-direction: column;
     justify-content: start;
     animation: fadein 2s;
-    background-color: #334157;
+    background-color: #2b2b2b;
 }
 
 .header__container{
@@ -112,9 +112,10 @@ body {
 }
 
 .product__card{
-    padding: 0.5rem;   
+    padding: 1rem;   
     box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.5); 
     background-color: #FFF;
+    border-radius: 0.5rem;
 }
 
 .product__link{
