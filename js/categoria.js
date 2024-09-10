@@ -1,4 +1,5 @@
 import apiMercadoLibre from './services/apiMercadoLibre.js'
+import CardProducto from './components/cardProducto.js'
 
 let categoriaParam = getParametroCategoria();
 getProductosCategoria(categoriaParam);
@@ -23,6 +24,10 @@ async function getProductosCategoria(categoria){
         let itemsPorCategoria = await apiMercadoLibre.Get(categoria);
         let itemsId = itemsPorCategoria.results.map((item) => item.id);
         console.log(itemsPorCategoria);
+
+        setTimeout(() => {
+            renderProductos(itemsPorCategoria.results);            
+        }, 100);
         //let itemsDetalle = await apiMercadoLibre.GetItems(itemsId);
 
         // let itemsFiltrados = itemsDetalle.map((item) => item.body);
@@ -36,4 +41,13 @@ async function getProductosCategoria(categoria){
     }
 
     
+}
+
+async function renderProductos(productos){
+    console.log(productos)
+    let productosContainer = document.getElementById("productos-container");
+    productosContainer.innerHTML = '';
+    productos.forEach(producto =>{ 
+        productosContainer.innerHTML += CardProducto(producto);
+    })  
 }
