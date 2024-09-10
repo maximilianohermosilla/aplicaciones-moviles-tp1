@@ -72,6 +72,12 @@ body {
     margin-top: 82px;
 }
 
+.nav__container{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
 .nav__container>div {
     display: flex;
     padding: 1rem;
@@ -94,11 +100,11 @@ body {
     display: inline-block;
 }
 
-.nav__container:hover .nav__title {
+.nav__categorias:hover .nav__title {
     opacity: 0.5;
 }
 
-.nav__container:hover .nav__list {
+.nav__categorias:hover .nav__list {
     display: flex;
 }
 

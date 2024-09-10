@@ -57,13 +57,13 @@ function enviarEncuesta(){
     }
     else{
         alert(`Datos:
-            Nombre: ${nombre}\n
-            Apellido: ${apellido}\n            
-            Fecha de Nacimiento:  ${fechaNacimiento}\n
-            Sexo: ${sexo}\n
-            Valoración: ${valoracion}\n
-            Email: ${email}\n
-            Comentario: ${comentario}\n`)
+            Nombre: ${nombre}
+            Apellido: ${apellido}          
+            Fecha de Nacimiento:  ${fechaNacimiento}
+            Sexo: ${sexo}
+            Valoración: ${valoracion}
+            Email: ${email}
+            Comentario: ${comentario}`)
     }
 }
 
@@ -125,9 +125,8 @@ function validarCampoCaracteres(input, nombre){
     }
 }
 
-
 function validarCampoFecha(input, nombre){
-    let fechaValidada = Date.parse(input);
+    let fechaValidada = Date.parse(input.split('-').reverse().join('-'));
 
     if(isNaN(fechaValidada)){
         return `El campo ${nombre} no contiene una fecha válida con formato DD-MM-AAAA\n`;
