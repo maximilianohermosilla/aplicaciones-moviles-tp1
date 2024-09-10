@@ -2,12 +2,13 @@
 <html>
 
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
     <title>UNAJ PC Store</title>
     <link rel="icon" type="image/x-icon" href="../img/logo.ico">
-
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 
 <body class="body__container">
@@ -17,7 +18,52 @@
         <a class="header__link" href="/encuesta.html"><img src="../img/logo_encuesta.png" alt="Logo">Encuesta</a>
     </header>
     <main class="main__container">
-        
+        <section class="section__encuesta">
+            <form class="form__encuesta" action="">
+                <h2 class="form__title">Encuesta</h2> 
+
+                <div class="form__container">
+                    <label for="inputNombre">Nombre:</label>
+                    <input type="text" id="inputNombre"/>
+                </div>
+                <div class="form__container">
+                    <label for="inputApellido">Apellido:</label>
+                    <input type="text" id="inputApellido"/>
+                </div>
+                <div class="form__container">
+                    <label for="inputFechaNacimiento">Fecha de Nacimiento:</label>
+                    <input type="date" id="inputFechaNacimiento" placeholder="dd/mm/yyyy" data-provide="datepicker" />
+                </div>
+                <div class="form__container">
+                    <label for="inputSexo">Sexo:</label>
+                    <input type="text" id="inputSexo"/>
+                </div>
+                <div class="form__container">
+                    <label for="inputValoracion">Valoración:</label>
+                    <select name="inputValoracion" id="inputValoracion">
+                        <option value="Lamentable">Lamentable</option>
+                        <option value="Mala">Mala</option>
+                        <option value="Podría ser mejor">Podría ser mejor</option>
+                        <option value="Cumple con mis expectativas">Cumple con mis expectativas</option>
+                        <option value="Me encantó">Me encantó</option>
+                    </select>
+                </div>
+                <div class="form__container">
+                    <label for="inputEmail">Email:</label>
+                    <input type="email" id="inputEmail"/>
+                </div>
+                <div class="form__container">
+                    <label for="inputComentario">Comentario:</label>
+                    <textarea id="inputComentario" rows="10" cols="50"></textarea>
+                </div>
+
+                <div class="buttons__encuesta">
+                    <button class="button__primary" id="buttonEnviar">ENVIAR</button>
+                    <button class="button__primary" id="buttonCancelar">CANCELAR</button>
+                    <button class="button__primary" id="buttonRestablecer">RESTABLECER VALORES</button>
+                </div>
+            </form>
+        </section>
     </main>
 
     <footer class="footer__container">
@@ -27,6 +73,10 @@
             Desarrollado por: <strong>Hermosilla Andrés Maximiliano</strong>
         </div>
     </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script type="module" src="./js/encuesta.js"></script>
 </body>
 
 </html>
