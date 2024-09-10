@@ -32,8 +32,21 @@ function initialConfig(){
         event.preventDefault();
         enviarEncuesta();
     })
-}
 
+    let buttonCancelar = document.getElementById("buttonCancelar");
+    buttonCancelar.addEventListener('click', () =>{
+        event.preventDefault();
+        if (confirm("¿Desea cancelar y volver a la página anterior?") == true) {
+            history.back()
+        }
+    })
+
+    let buttonRestablecer = document.getElementById("buttonRestablecer");
+    buttonRestablecer.addEventListener('click', () =>{
+        event.preventDefault();
+        document.getElementById("form-encuesta").reset();
+    })
+}
 
 function enviarEncuesta(){
     obtenerValores();
