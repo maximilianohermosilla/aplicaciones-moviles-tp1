@@ -1,0 +1,77 @@
+.encuesta__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-items: flex-start;
+    min-height: 90vh;
+    margin-top: 82px;
+    background-color: #FFF;
+}
+
+.section__encuesta {
+    min-width: 75vw;
+    background: linear-gradient(270deg, rgb(59, 139, 163) 0%, rgba(29, 137, 238, 0.7) 100%);
+    border-radius: 0.5rem;
+    box-shadow: 3px 5px 16px rgba(37, 37, 37, 0.9);
+}
+
+.form__encuesta {
+    padding: 2rem;
+    width: clamp(35ch, 50%, 75ch);
+    max-width: 100vw;
+}
+
+.section__encuesta,
+.form__encuesta {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    margin: auto;
+}
+
+.form__title {
+    text-align: center;
+    color: white;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
+}
+
+.form__container {
+    display: flex;
+    flex-direction: column;
+}
+
+.form__encuesta label{
+    font-weight: 600;
+    padding-bottom: 0.25rem;
+}
+
+.form__container input, .form__container select, .form__container textarea{
+    padding: 0 5px;
+    border: 1px solid lightgrey;
+    box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.form__container input{
+    height: 32px;
+}
+
+.form__container select{
+    height: 34px;
+}
+
+.form__container select:focus-visible{
+    border: 0;
+    outline: 0;
+}
+
+:focus-visible {
+    outline: lightskyblue auto 1px;
+}
+
+.buttons__encuesta {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5rem 0;
+}
