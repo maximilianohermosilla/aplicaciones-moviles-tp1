@@ -2,6 +2,7 @@ import apiMercadoLibre from './services/apiMercadoLibre.js'
 import carritoService from './services/carritoService.js'
 import CardProducto from './components/cardProducto.js'
 
+let carritoStorage = localStorage.getItem("productos")? JSON.parse(localStorage.getItem("productos")): [];
 let categoriaTitle = "";
 let categoriaParam = getParametroCategoria();
 let listaProductos;
@@ -22,11 +23,8 @@ function onCardClick(elements){
 
 function addProduct(id){
     const product = listaProductos.find((element) => id == element.id);  
-    // let elementCantidad = document.getElementById("select-cantidad_"+id); 
-    // let cantidad = parseInt(elementCantidad.options[elementCantidad.selectedIndex].value);
-    
     carritoService.SaveProduct(product, 1);
-    //showCarrito();
+    getProductosCategoria(categoriaParam);
 }
 
 function getParamsFromHref(){
@@ -48,36 +46,35 @@ async function getProductosCategoria(categoria){
     if(categoria != ""){
         let itemsPorCategoria = await apiMercadoLibre.Get(categoria);
         let itemsId = itemsPorCategoria.results.map((item) => item.id);
-        console.log(itemsPorCategoria);
+        //console.log(itemsPorCategoria);
 
         setTimeout(() => {
             categoriaTitle = itemsPorCategoria.filters[0].values[0].name;
-            let categoriaTitleTag = document.getElementById("categoria-title");
-            categoriaTitleTag.innerHTML = categoriaTitle;
+            $("#categoria-title").html(categoriaTitle);
+            // let categoriaTitleTag = document.getElementById("categoria-title");
+            // categoriaTitleTag.innerHTML = categoriaTitle;
             listaProductos = itemsPorCategoria.results;
             renderProductos(itemsPorCategoria.results);
-        }, 100);
-        //let itemsDetalle = await apiMercadoLibre.GetItems(itemsId);
-
-        // let itemsFiltrados = itemsDetalle.map((item) => item.body);
-        // let itemsResult = itemsFiltrados.map( ({title, price, pictures}) => ({title, price, pictures}));                
-        // console.log(itemsResult);
-
-        // itemsResult.forEach(element => {
-        //     //downloadImage(element.pictures[0].secure_url, element.title);
-        //     console.log(element)
-        // });
-    }
-
-    
+        }, 100);       
+    }    
 }
 
 async function renderProductos(productos){
-    console.log(productos)
+    //console.log(productos)
     let productosContainer = document.getElementById("productos-container");
     productosContainer.innerHTML = '';
     productos.forEach(producto =>{ 
         productosContainer.innerHTML += CardProducto(producto);
+        getProductoEnCarrito(producto);
     })  
-    onCardClick(document.querySelectorAll(".product__card"));    
+    onCardClick(document.querySelectorAll(".product__card"));
+}
+
+function getProductoEnCarrito(product){
+    carritoStorage = localStorage.getItem("productos")? JSON.parse(localStorage.getItem("productos")): [];
+    const repeat = carritoStorage.some((repeatProduct) => repeatProduct.id == product.id);
+    if(repeat){
+        let articleId = `#${product.id.toString()}`;
+        $(articleId).addClass("product__card__selected");
+    }
 }

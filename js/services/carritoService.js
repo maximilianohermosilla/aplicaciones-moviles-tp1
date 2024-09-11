@@ -1,4 +1,3 @@
-import RenderCarrito from '../components/carritoProductos.js'
 import carritoCounter from './carritoCounter.js'
 
 let carritoStorage = localStorage.getItem("productos")? JSON.parse(localStorage.getItem("productos")): [];
@@ -12,40 +11,9 @@ async function getCarritoStorage(){
 
 async function renderizarCarrito(){
     carritoStorage = await getCarritoStorage();
-    let carritoContainer = document.getElementById("carrito-container");
-    carritoContainer.innerHTML = '';
-    // carritoStorage.forEach(producto =>{ 
-    //     carritoContainer.innerHTML += RenderCarrito(producto);
-    // })
-    // onButtonAddClick(document.querySelectorAll(".btnAgregarCantidad"));
-    // onButtonRemoveClick(document.querySelectorAll(".btnQuitarCantidad"));
-    // onButtonDeleteElementClick(document.querySelectorAll(".delete-icon"));
-    // getPrecioTotal();
+    getPrecioTotal();
 }
 
-function onButtonAddClick(elements){
-    elements.forEach((element) => {
-        element.addEventListener('click', () =>{
-            addProduct(element.id);
-        })
-    });
-}
-
-function onButtonRemoveClick(elements){
-    elements.forEach((element) => {
-        element.addEventListener('click', () =>{
-            removeProduct(element.id);
-        })
-    });
-}
-
-function onButtonDeleteElementClick(elements){
-    elements.forEach((element) => {
-        element.addEventListener('click', () =>{
-            clearProduct(element.id);
-        })
-    });
-}
 
 function addProduct(id){ 
     const product = carritoStorage.find((element) => id == element.id);
@@ -54,13 +22,8 @@ function addProduct(id){
 
 function saveProduct(product, cantidad){
     const repeat = carritoStorage.some((repeatProduct) => repeatProduct.id === product.id);
-    console.log(carritoStorage);
     if(repeat){
-        carritoStorage.map((prod) => {
-            if (prod.id == product.id){
-                prod.cantidad += cantidad;
-            }            
-        });
+        removeProduct(product.id);        
     } else{
         carritoStorage.push({
             id: product.id,
@@ -94,27 +57,33 @@ function clearProduct(id){
 
     saveLocalStorage(carritoStorage);
     if (!carritoStorage.length > 0){ 
-        window.location.reload();
+        $("#precio-tooltip").css("display", "none");
+        $("#cantidad-tooltip").css("display", "none");
     }
 }
 
 function saveLocalStorage(carritoStorage){    
     localStorage.setItem("productos", JSON.stringify(carritoStorage));    
-    carritoCounter.Show();
-    renderizarCarrito();
+    carritoCounter.Show();  
+    renderizarCarrito();  
 }
 
 function clearCarrito(){    
-    localStorage.removeItem("productos");    
+    localStorage.removeItem("productos");   
+    renderizarCarrito();   
 }
 
 function getPrecioTotal(){    
     let precioTotal = 0;
+
     carritoStorage.map((prod) => {
-        precioTotal += (prod.precio * prod.cantidad);
+        precioTotal += (prod.price * prod.cantidad);
     });
-    const precioElement = document.getElementById("precio-total");
-    precioElement.textContent = '$' + precioTotal;
+
+    if(precioTotal>0){
+        $("#precio-tooltip").css("display", "flex");
+        $("#precio-tooltip").html('$' + precioTotal);
+    }
 }
 
 setTimeout(() => {    

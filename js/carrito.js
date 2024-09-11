@@ -1,68 +1,30 @@
+import RenderCarrito from './components/carritoProductos.js'
 import carritoService from './services/carritoService.js'
 
-let pages = [];
-let precio = 0;
-pages.push({ html: '/pages/components/carritoDetalle.html', into: 'carrito-container'});
-loaderHtml.Get(pages);
+let carritoStorage = localStorage.getItem("productos")? JSON.parse(localStorage.getItem("productos")): [];
 
-//Variables
-let carritoStorage = await carritoService.GetCarrito();
+function init(){
+    let carritoContainer = document.getElementById("carrito-container");
+    carritoContainer.innerHTML = '';
 
-//Functions
-function checkCarrito(){    
-    if (!carritoStorage.length > 0){
-        const carritoContainer = document.getElementById("carrito-container");                
-        carritoContainer.style.display = "none";
-        
-        var titleEmpty = document.getElementById("title-empty");
-        if(titleEmpty){
-            titleEmpty.textContent = "  El carrito está vacío";
-            titleEmpty.className = "bi bi-cart-dash title divTituloCarrito";
-        }
+    let carritoTitle = carritoStorage.length > 0? "Detalle Carrito": "El carrito se encuentra vacío";    
+    $("#carrito-title").html(carritoTitle);
+
+    carritoStorage.forEach(producto =>{ 
+        carritoContainer.innerHTML += RenderCarrito(producto);
+    }) 
+
+    if(carritoStorage.length == 0){
+        $("#carrito-container").css("display", "none");
+        $("#carrito-acciones").css("display", "none");
     }
+
+    $("#carrito-clear").click(() => {
+        if (confirm("¿Está seguro de que desea vaciar el carrito de compras?") == true) {
+            carritoService.ClearCarrito();
+            window.location.reload();            
+        }
+    });
 }
 
-function domSettings(){
-    const pedidoContainer = document.getElementById("carrito-container");
-    const btnConfirmar = document.getElementById("btnConfirmarPedido");
-    const btnCancelar = document.getElementById("btnCancelarPedido");
-    pedidoContainer.style.display = "block";    
-
-    btnConfirmar.addEventListener('click', () =>{
-        let title = "Confirmar Pedido";
-        let text = "Usted está a punto de confirmar el pedido. ¿Desea continuar?";
-        showConfirmModal(title, text, confirmCarrito);
-    })    
-    
-    btnCancelar.addEventListener('click', () =>{   
-        let title = "Cancelar Pedido";
-        let text = "Usted está a punto de cancelar el pedido. ¿Desea continuar?";
-        showConfirmModal(title, text, clearCarrito);
-    })
-}
-
-function clearCarrito(){ 
-    carritoService.ClearCarrito();
-    window.location.reload();
-}
-
-function showPopUp(title, text, callback){
-    const popUpContainer = document.getElementById("popUpContainer");
-    popUpContainer.innerHTML = RenderPopUp(title, text);    
-
-    const popupModal = new bootstrap.Modal(document.getElementById('popupModal'));    
-    popupModal.show();        
-    
-    const popup = document.getElementById('popupModal');        
-    popup.addEventListener('hidden.bs.modal', function (event) {
-        clearCarrito();
-    })
-}
-
-setTimeout(() => {  
-    domSettings();
-    checkCarrito();    
-}, 500);
-
-
-
+init();

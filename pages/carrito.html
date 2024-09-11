@@ -8,17 +8,51 @@
     <title>UNAJ PC Store</title>
     <link rel="icon" type="image/x-icon" href="../img/logo.ico">
     <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/carrito.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
 
 <body class="body__container"></body>
     <header class="header__container">
         <a class="" href="../index.html"><img class="header__logo" src="../img/logo_unaj.png" alt="Logo"></a>
         <h1 class="header__title">UNAJ PC Store</h1>
-        <a class="header__link" href="./carrito.html"><img src="../img/icons/logo_carrito.png" alt="Logo"><span id="cantidad-tooltip" class="cantidad-tooltip"></span></a>
+        <a class="header__link" href="./carrito.html"><img src="../img/icons/logo_carrito.png" alt="Logo">
+            <span id="cantidad-tooltip" class="cantidad-tooltip"></span>
+            <span id="precio-tooltip" class="precio-tooltip"></span>
+        </a>
     </header>
     <main class="main__container">
+        <nav class="nav__container">
+            <div class="nav__categorias">
+                <h3 class="nav__title">Categorías <img src="../img/icons/down-arrow.png" width="12" alt="Down Arrow"></h3>
+                <ul class="nav__list">
+                    <li>
+                        <a href="./categoria.html?cat=MLA430687" class="nav__link">Notebooks y Accesorios</a>
+                    </li>
+                    <li>
+                        <a href="./categoria.html?cat=MLA430598" class="nav__link">Almacenamiento</a>
+                    </li>
+                    <li>
+                        <a href="./categoria.html?cat=MLA454379" class="nav__link">Periféricos de PC</a>
+                    </li>
+                    <li>
+                        <a href="./categoria.html?cat=MLA1656" class="nav__link">Monitores y Accesorios</a>
+                    </li>
+                </ul>
+            </div>
 
+            <div class="header__link">
+                <a class="header__link" href="./encuesta.html"><img src="../img/icons/logo_encuesta.png" alt="Logo">Encuesta</a>
+            </div>
+        </nav>
+        <h3 class="carrito__container" id="carrito-title"></h3>            
+        <section class="carrito__container" id="carrito-container">
+            <!-- carrito -->
+        </section>
+        <div class="carrito__container carrito__acciones" id="carrito-acciones">
+            <button class="button__primary" id="carrito-clear">VACIAR CARRITO</button>
+        </div>
     </main>
 
     <footer class="footer__container">
@@ -30,7 +64,7 @@
     </footer>
 
     <!-- Scripts -->
-    <!-- <script type="module" src="../js/carrito.js"></script> -->
+    <script type="module" src="../js/carrito.js"></script>
 </body>
 
 </html>

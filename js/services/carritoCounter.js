@@ -1,9 +1,8 @@
 function renderCantidad(){
     let carritoStorage = localStorage.getItem("productos")? JSON.parse(localStorage.getItem("productos")): [];
     if (carritoStorage.length > 0){
-        var tooltip = document.getElementById("cantidad-tooltip");
-        tooltip.style.display = "flex";    
-        tooltip.textContent = carritoStorage.length;
+        $("#cantidad-tooltip").css("display", "flex");
+        $("#cantidad-tooltip").text(carritoStorage.length);
     }
 }
 
