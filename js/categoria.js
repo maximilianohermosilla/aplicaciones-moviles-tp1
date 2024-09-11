@@ -1,9 +1,33 @@
 import apiMercadoLibre from './services/apiMercadoLibre.js'
+import carritoService from './services/carritoService.js'
 import CardProducto from './components/cardProducto.js'
 
 let categoriaTitle = "";
 let categoriaParam = getParametroCategoria();
-getProductosCategoria(categoriaParam);
+let listaProductos;
+
+init();
+
+function init(){
+    getProductosCategoria(categoriaParam);
+}
+
+function onCardClick(elements){
+    elements.forEach((element) => {
+        element.addEventListener('click', () =>{
+            addProduct(element.id);
+        })
+    });
+}
+
+function addProduct(id){
+    const product = listaProductos.find((element) => id == element.id);  
+    // let elementCantidad = document.getElementById("select-cantidad_"+id); 
+    // let cantidad = parseInt(elementCantidad.options[elementCantidad.selectedIndex].value);
+    
+    carritoService.SaveProduct(product, 1);
+    //showCarrito();
+}
 
 function getParamsFromHref(){
     let href = window.location.href;
@@ -30,7 +54,8 @@ async function getProductosCategoria(categoria){
             categoriaTitle = itemsPorCategoria.filters[0].values[0].name;
             let categoriaTitleTag = document.getElementById("categoria-title");
             categoriaTitleTag.innerHTML = categoriaTitle;
-            renderProductos(itemsPorCategoria.results);            
+            listaProductos = itemsPorCategoria.results;
+            renderProductos(itemsPorCategoria.results);
         }, 100);
         //let itemsDetalle = await apiMercadoLibre.GetItems(itemsId);
 
@@ -54,4 +79,5 @@ async function renderProductos(productos){
     productos.forEach(producto =>{ 
         productosContainer.innerHTML += CardProducto(producto);
     })  
+    onCardClick(document.querySelectorAll(".product__card"));    
 }

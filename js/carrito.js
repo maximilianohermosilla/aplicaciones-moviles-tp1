@@ -1,4 +1,4 @@
-import carritoService from '/src/services/carritoService.js'
+import carritoService from './services/carritoService.js'
 
 let pages = [];
 let precio = 0;

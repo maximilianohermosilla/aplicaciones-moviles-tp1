@@ -1,5 +1,5 @@
 function renderCantidad(){
-    let carritoStorage = localStorage.getItem("mercaderias")? JSON.parse(localStorage.getItem("mercaderias")): [];
+    let carritoStorage = localStorage.getItem("productos")? JSON.parse(localStorage.getItem("productos")): [];
     if (carritoStorage.length > 0){
         var tooltip = document.getElementById("cantidad-tooltip");
         tooltip.style.display = "flex";    

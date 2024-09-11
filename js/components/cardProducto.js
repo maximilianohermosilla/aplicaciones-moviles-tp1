@@ -1,6 +1,6 @@
 export default function CardProducto(producto){
     return `
-    <article class="product__card">
+    <article class="product__card" id="${producto.id}">
         <div class="product__link">
             <img class="product__img"
                 src="${producto.thumbnail}" alt="articulo">
