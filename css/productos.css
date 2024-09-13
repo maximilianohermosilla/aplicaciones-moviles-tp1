@@ -1,0 +1,10 @@
+.productos__container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    box-shadow: -5px 0px 5px rgba(0, 0, 0, 0.5);
+    background-color: #ebebeb;
+    padding: 2rem 0;
+}

@@ -9,6 +9,10 @@ body {
     font-family: "Nunito", sans-serif;
 }
 
+:focus-visible {
+    outline: lightskyblue auto 1px;
+}
+
 .body__container {
     height: 100%;
     min-height: 100vh;
@@ -27,7 +31,7 @@ body {
 
 .header__container__div {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between;    
     padding: 0 0.5rem;
     background: rgb(93, 104, 107);
     background: linear-gradient(0deg, rgb(70, 80, 83) 0%, rgba(0, 0, 0, 1) 100%);
@@ -38,7 +42,7 @@ body {
 
 .header__logo {
     margin: 0.5rem 0;
-    width: 100px;
+    width: 64px;
     height: 60px;
 }
 
@@ -53,6 +57,46 @@ body {
     color: white;
 }
 
+.header__busqueda{
+    display: flex;
+    gap: 0;
+    height: 32px;
+    margin: auto;
+}
+
+.input__busqueda{    
+    width: 35vw;
+    border: 0;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    padding: 0 0.5rem;
+}
+
+
+.input__busqueda:focus-visible {
+    outline: #FFF auto 0px;
+}
+
+.button__busqueda{
+    background: #FFF;
+    border: 0;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.button__busqueda:hover{
+    cursor: pointer;
+}
+
+.button__busqueda:hover .img__busqueda{
+    opacity: 0.6;
+}
+
+.img__busqueda{
+    width: 16px;
+    height: 16px;
+}
+
 .header__link {
     display: flex;
     justify-content: end;
@@ -61,7 +105,7 @@ body {
     color: white;
     text-decoration: none;
     font-size: 1.17rem;
-    min-width: 100px;
+    min-width: 64px;
     font-weight: bold;
 }
 
@@ -75,7 +119,7 @@ body {
 }
 
 .carrito__link{
-    padding-right: 0.5rem;
+    padding-right: 0.1rem;
 }
 
 .nav__container {
@@ -307,8 +351,8 @@ body {
     margin-top: 50px;
 }
 
-
 @media screen and (min-width: 1024px) {
+
     .header__title {
         display: block;
     }
