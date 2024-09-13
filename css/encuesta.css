@@ -12,7 +12,8 @@
 
 .section__encuesta {
     min-width: 75vw;
-    background: linear-gradient(270deg, rgb(59, 139, 163) 0%, rgba(29, 137, 238, 0.7) 100%);
+    background-color: var(--first-color);
+    /* background: linear-gradient(270deg, rgb(59, 139, 163) 0%, rgba(29, 137, 238, 0.7) 100%); */
     border-radius: 0.5rem;
     box-shadow: 3px 5px 16px rgba(37, 37, 37, 0.9);
 }
@@ -46,6 +47,8 @@
 .form__encuesta label{
     font-weight: 600;
     padding-bottom: 0.25rem;
+    color: #FFF;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
 }
 
 .form__container input, .form__container select, .form__container textarea{
