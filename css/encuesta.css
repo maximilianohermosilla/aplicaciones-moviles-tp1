@@ -5,8 +5,9 @@
     align-items: center;
     align-items: flex-start;
     min-height: 90vh;
-    margin-top: 82px;
+    margin-top: 150px;
     background-color: #FFF;
+    padding: 1rem 0;
 }
 
 .section__encuesta {

@@ -82,7 +82,7 @@ function getPrecioTotal(){
 
     if(precioTotal>0){
         $("#precio-tooltip").css("display", "flex");
-        $("#precio-tooltip").html('$' + precioTotal);
+        $("#precio-tooltip").html('$' + precioTotal.toFixed(2));
     }
 }
 
