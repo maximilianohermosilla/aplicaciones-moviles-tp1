@@ -3,20 +3,30 @@ import carritoService from './services/carritoService.js'
 import CardProducto from './components/cardProducto.js'
 
 let carritoStorage = localStorage.getItem("productos")? JSON.parse(localStorage.getItem("productos")): [];
-let busquedaTitle = "";
 let busquedaParam = "";
 let listaProductos;
 
-init();
+const getProductos = async (param) => {
+    let productos = await apiMercadoLibre.GetItems(param);
+    console.log(productos)
+    setTimeout(() => {
+        listaProductos = productos.results;
+        renderProductos(productos.results);
+    }, 100);   
+}
 
 function init(){
     //getProductosCategoria(categoriaParam);
     busquedaParam = getParametroBusqueda();
     console.log(busquedaParam)
+    listaProductos = getProductos(busquedaParam);
     setTimeout(() => {
-        $("#productos-title").html("Resultados para: " + busquedaParam);        
+        $("#productos-title").html("Resultados para: " + busquedaParam.replaceAll("%20", " "));        
+        console.log(listaProductos)
     }, 500);
 }
+
+init();
 
 function onCardClick(elements){
     elements.forEach((element) => {
@@ -46,23 +56,6 @@ function getParametroBusqueda(){
     else{
         return "";
     }
-}
-
-async function getProductosCategoria(categoria){
-    if(categoria != ""){
-        let itemsPorCategoria = await apiMercadoLibre.Get(categoria);
-        let itemsId = itemsPorCategoria.results.map((item) => item.id);
-        //console.log(itemsPorCategoria);
-
-        setTimeout(() => {
-            categoriaTitle = itemsPorCategoria.filters[0].values[0].name;
-            $("#productos-title").html(categoriaTitle);
-            // let categoriaTitleTag = document.getElementById("categoria-title");
-            // categoriaTitleTag.innerHTML = categoriaTitle;
-            listaProductos = itemsPorCategoria.results;
-            renderProductos(itemsPorCategoria.results);
-        }, 100);       
-    }    
 }
 
 async function renderProductos(productos){
