@@ -1,65 +1,109 @@
-.body__producto {
-    height: 100%;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
+.body__container{
+    background-color: #ebebeb;
 }
 
-.producto__container {
+.main__container{
+    width: 100vw;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;    
+}
+
+.section__producto {
+    width: 100%;
     min-height: 100%;
-    min-width: 100%;
-    margin-top: 82px;
+    margin: 1rem 0;
+    border-radius: 0.5rem;
+    box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.5);
 }
 
-.producto__card {
+.producto__article, .article__atributos {
     flex-direction: row;
     padding: 1rem;
     background-color: #FFF;
 }
 
 .producto__principal {
-    text-decoration: none;
-    display: flex;
-    justify-content: center;
-    height: 100%;
-}
-
-.producto__img {
-    width: 600px;
-    height: 600px;
-    object-fit: contain;
-}
-
-.producto__data {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
+.producto__img {
+    object-fit: contain;
+    object-position: top;
+}
+
+.producto__data {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;    
+}
+
 .producto__name {
     margin: 0.5rem 0;
-    font-size: 2rem;
     font-weight: 600;
     color: rgba(0, 0, 0, 0.8);
-    padding: 1rem;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
 }
 
 .producto__price {
-    font-size: 2rem;
     color: green;
+    margin: 1rem 0;
     font-weight: 600;
-    padding: 1rem;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
 }
 
-.producto__back {
-    width: 100%;
-    font-weight: 600;
-    padding: 1rem 0;
+.section__producto__pictures{
+    display: flex;
+    max-width: 100vw;
+    margin-top: 2rem;
+    padding: 2rem 0;
+    overflow-x: auto;
 }
 
-.producto__back a {
-    text-decoration: none;
-    font-size: 2rem;
-    color: rgba(0, 0, 0, 0.5);
+.producto__picture{
+    width: 33%;
+    max-height: 25vh;
+    object-fit: contain;
+}
+
+.atributo__container{
+    display: flex;
+    justify-content: start;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.atributo__name{
+    font-weight: bold;
+    margin: 0;
+}
+
+.atributo__value{
+    opacity: 0.7;
+    margin-top: 0;
+}
+
+@media screen and (min-width: 1024px){ 
+    .producto__principal {     
+        flex-direction: row;
+    }
+
+    .producto__img {
+        width: 30vw;
+    }
+
+    .producto__data {
+        justify-content: space-between;
+        padding: 0 1rem;
+    }
+    
+    .producto__name, .producto__price {
+        font-size: 2rem;
+    }
+
+    .atributo__container{
+        flex-direction: row;
+    }
 }

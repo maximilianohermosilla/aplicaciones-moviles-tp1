@@ -1,7 +1,28 @@
 let url = 'https://api.mercadolibre.com'
 
 let listaItems = [];
-let JwtToken = "APP_USR-5464777943433994-090121-b75a161d311b6c056727e92c4ce497fa-94045593";
+//let JwtToken = "APP_USR-5464777943433994-090121-b75a161d311b6c056727e92c4ce497fa-94045593";
+
+const getCode = async() => {
+    //categoria = "MLA3794";
+    let urlCode = `https://auth.mercadolibre.com.ar/authorization?response_type=code&client_id=5464777943433994&redirect_uri=https://mayi-beer-collection.web.app/`;
+    let response = await fetch(urlCode, {
+        method: 'GET',
+        headers: new Headers({
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': 'x-requested-with, Content-Type, origin, authorization, accept, client-security-token',
+            'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,PUT,PATCH,DELETE',
+            'Access-Control-Allow-Credentials': 'true'
+        }),
+    })
+    if(response.ok){
+        let responseJson = await response.json();        
+        console.log(responseJson)
+    }  
+    console.log(response)
+    return listaItems;
+}
 
 const getCategorias = async(categoria) => {
     //categoria = "MLA3794";
@@ -23,12 +44,24 @@ const getItemsPorCategoria = async(categoria) => {
 }
 
 const getItems= async(param) => {
-    let urlItems = `${url}/sites/MLA/search?q=${param}&limit=10&offset=0`;
+    let categoria = "MLA1648";
+    let urlItems = `${url}/sites/MLA/search?category=${categoria}&q=${param}&limit=10&offset=0`;
     let response = await fetch(urlItems, {})
     if(response.ok){
         listaItems = await response.json();
     }  
     return listaItems;
+}
+
+const getItemPorId= async(id) => {
+    let producto;
+    let urlItemsPorId = `${url}/items/${id}`;
+    let response = await fetch(urlItemsPorId, {});
+
+    if(response.ok){
+        producto = await response.json();
+    }  
+    return producto;
 }
 
 const getItemsPorId= async(listaId) => {
@@ -48,6 +81,6 @@ const getItemsPorId= async(listaId) => {
     return listaItems;
 }
 
-const apiMercadoLibre = { GetCategorias: getCategorias, GetItems: getItems, Get: getItemsPorCategoria, GetItemsPorId: getItemsPorId };
+const apiMercadoLibre = { Get: getItemsPorCategoria, GetCategorias: getCategorias, GetItems: getItems, GetItemPorId: getItemPorId, GetCode: getCode };
 
 export default apiMercadoLibre;

@@ -31,12 +31,12 @@ init();
 function onCardClick(elements){
     elements.forEach((element) => {
         element.addEventListener('click', () =>{
-            addProduct(element.id);
+            window.location.href = `../../pages/producto.html?${element.id}`;
         })
     });
 }
 
-function addProduct(id){
+function viewProduct(id){
     const product = listaProductos.find((element) => id == element.id);  
     carritoService.SaveProduct(product, 1);
     getParametroBusqueda(categoriaParam);

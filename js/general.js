@@ -14,6 +14,7 @@ const loadHtml = async (pages) => {
 }
 
 const getCategorias = async (categoria) => {
+    //categorias = await apiMercadoLibre.GetCode();
     categorias = await apiMercadoLibre.GetCategorias(categoria);
 
     if(categorias.children_categories){
