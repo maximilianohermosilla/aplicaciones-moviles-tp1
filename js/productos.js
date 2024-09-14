@@ -26,20 +26,12 @@ function init(){
     }, 500);
 }
 
-init();
-
 function onCardClick(elements){
     elements.forEach((element) => {
         element.addEventListener('click', () =>{
             window.location.href = `../../pages/producto.html?${element.id}`;
         })
     });
-}
-
-function viewProduct(id){
-    const product = listaProductos.find((element) => id == element.id);  
-    carritoService.SaveProduct(product, 1);
-    getParametroBusqueda(categoriaParam);
 }
 
 function getParamsFromHref(){
@@ -77,3 +69,5 @@ function getProductoEnCarrito(product){
         $(articleId).addClass("product__card__selected");
     }
 }
+
+init();

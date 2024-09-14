@@ -25,16 +25,6 @@ function init(){
     }, 500);
 }
 
-init();
-
-function onCardClick(elements){
-    elements.forEach((element) => {
-        element.addEventListener('click', () =>{
-            addProduct(element.id);
-        })
-    });
-}
-
 function getParamsFromHref(){
     let href = window.location.href;
     return href.split('?')[1];
@@ -61,5 +51,7 @@ async function renderProducto(producto){
 
     let atributos = producto.attributes.map(item => ProductoAtributo(item))
     $("#producto-atributos").html(atributos);
-    onCardClick(document.querySelectorAll(".product__card"));
 }
+
+
+init();
