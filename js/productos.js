@@ -2,12 +2,13 @@ import apiMercadoLibre from './services/apiMercadoLibre.js'
 import carritoService from './services/carritoService.js'
 import CardProducto from './components/cardProducto.js'
 
+let categoriaPrincipal = 'MLA1648';
 let carritoStorage = localStorage.getItem("productos")? JSON.parse(localStorage.getItem("productos")): [];
 let busquedaParam = "";
 let listaProductos;
 
 const getProductos = async (param) => {
-    let productos = await apiMercadoLibre.GetItems(param);
+    let productos = await apiMercadoLibre.GetItems(categoriaPrincipal, param, '', '', '');
     console.log(productos)
     setTimeout(() => {
         listaProductos = productos.results;
@@ -15,11 +16,11 @@ const getProductos = async (param) => {
     }, 100);   
 }
 
-function init(){
+async function init(){
     //getProductosCategoria(categoriaParam);
     busquedaParam = getParametroBusqueda();
     console.log(busquedaParam)
-    listaProductos = getProductos(busquedaParam);
+    listaProductos = await getProductos(busquedaParam);
     setTimeout(() => {
         $("#productos-title").html("Resultados para: " + busquedaParam.replaceAll("%20", " "));        
         console.log(listaProductos)

@@ -43,9 +43,9 @@ const getItemsPorCategoria = async(categoria) => {
     return listaItems;
 }
 
-const getItems= async(param) => {
-    let categoria = "MLA1648";
-    let urlItems = `${url}/sites/MLA/search?category=${categoria}&q=${param}&limit=10&offset=0`;
+const getItems= async(categoria = 'MLA1648', parametro, limit = '10', offset = 0, filter = "") => {    
+    let urlItems = `${url}/sites/MLA/search?category=${categoria}&q=${parametro}&limit=${limit}&offset=${offset}${filter}`;
+    //console.log(urlItems)
     let response = await fetch(urlItems, {})
     if(response.ok){
         listaItems = await response.json();

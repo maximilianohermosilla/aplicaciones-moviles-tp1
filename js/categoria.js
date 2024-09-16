@@ -46,7 +46,7 @@ async function getProductosCategoria(categoria){
     if(categoria != ""){
         let itemsPorCategoria = await apiMercadoLibre.Get(categoria);
         let itemsId = itemsPorCategoria.results.map((item) => item.id);
-        //console.log(itemsPorCategoria);
+        console.log(itemsPorCategoria);
 
         setTimeout(() => {
             categoriaTitle = itemsPorCategoria.filters[0].values[0].name;
