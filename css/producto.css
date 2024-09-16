@@ -108,7 +108,7 @@
     }
 
     .producto__data {
-        justify-content: space-between;
+        justify-content: start;
         padding: 0 2rem;
     }
     

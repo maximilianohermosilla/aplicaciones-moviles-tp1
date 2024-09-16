@@ -22,7 +22,8 @@ async function init(){
     console.log(busquedaParam)
     listaProductos = await getProductos(busquedaParam);
     setTimeout(() => {
-        $("#productos-title").html("Resultados para: " + busquedaParam.replaceAll("%20", " "));        
+        $("#productos-title").html("Resultados para: " + busquedaParam.replaceAll("%20", " "));
+        $("#input-busqueda").val(busquedaParam.replaceAll("%20", " "));
         console.log(listaProductos)
     }, 500);
 }

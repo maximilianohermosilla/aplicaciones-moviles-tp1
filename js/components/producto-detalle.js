@@ -12,7 +12,7 @@ export default function ProductoDetalle(producto){
                 <div class="producto__data">
                     <h3 class="producto__name">${producto.title}</h3>
                     <p class="">${producto.warranty}</p>
-                    <p class="producto__price">$ ${producto.price}</p>
+                    <p class="producto__price">$ ${producto.price.toLocaleString("es-AR")}</p>
                     <button class="button__primary">Agregar</button>
                 </div>
             </div>

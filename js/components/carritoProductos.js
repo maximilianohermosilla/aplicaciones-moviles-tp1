@@ -11,7 +11,7 @@ export default function RenderCarrito(producto){
         </div>
 
         <div class="carrito__precio">
-            <div class="carrito__span__precio">$ ${producto.price * producto.cantidad}</div>
+            <div class="carrito__span__precio">$ ${(producto.price * producto.cantidad).toLocaleString("es-AR")}</div>
         </div>   
     </div>
     `;

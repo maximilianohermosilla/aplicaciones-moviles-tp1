@@ -42,4 +42,9 @@ setTimeout(() => {
             window.location.href = `../../pages/productos.html?search=${inputBusqueda}`;        
         }
     });
+
+    $("#input-busqueda").on("change", function(e){
+        let inputBusqueda = $("#input-busqueda").val();
+        window.location.href = `../../pages/productos.html?search=${inputBusqueda}`;        
+    });
 }, 500);

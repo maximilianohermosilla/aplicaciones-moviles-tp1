@@ -334,9 +334,23 @@ body {
     max-width: 200px;
 }
 
+.product__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.button__agregar{
+    padding: 0 0.75rem;
+    height: 2rem;
+    font-weight: 400;
+    z-index: 50;
+}
+
 .product__price {
     color: green;
     font-weight: 600;
+    font-size: 1.25rem;
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
 }
 

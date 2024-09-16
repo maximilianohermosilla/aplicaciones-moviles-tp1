@@ -34,8 +34,8 @@ const getCategorias = async(categoria) => {
     return listaItems;
 }
 
-const getItemsPorCategoria = async(categoria) => {
-    let urlItemsPorCategoria = `${url}/sites/MLA/search?category=${categoria}&limit=10&offset=0`;
+const getItemsPorCategoria = async(categoria, limit = '10', offset = 0) => {
+    let urlItemsPorCategoria = `${url}/sites/MLA/search?category=${categoria}&limit=${limit}&offset=${offset}`;
     let response = await fetch(urlItemsPorCategoria, {});
     if(response.ok){
         listaItems = await response.json();

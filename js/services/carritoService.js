@@ -21,6 +21,7 @@ function addProduct(id){
 }
 
 function saveProduct(product, cantidad){
+    console.log(product)
     const repeat = carritoStorage.some((repeatProduct) => repeatProduct.id === product.id);
     if(repeat){
         removeProduct(product.id);        
@@ -82,7 +83,7 @@ function getPrecioTotal(){
 
     if(precioTotal>0){
         $("#precio-tooltip").css("display", "flex");
-        $("#precio-tooltip").html('$' + precioTotal.toFixed(2));
+        $("#precio-tooltip").html('$' + precioTotal.toLocaleString("es-AR"));
     }
 }
 

@@ -6,7 +6,10 @@ export default function CardProducto(producto){
                 src="${producto.thumbnail}" alt="articulo">
             <div class="product__data">
                 <p class="product__name">${producto.title}</p>
-                <p class="product__price">$ ${producto.price}</p>
+                <div class="product__footer">
+                    <p class="product__price">$ ${producto.price.toLocaleString("es-AR")}</p>
+                    <button class="button__secondary button__agregar" id="button_${producto.id}">+</button>
+                </div>
             </div>
         </div>
     </article>
