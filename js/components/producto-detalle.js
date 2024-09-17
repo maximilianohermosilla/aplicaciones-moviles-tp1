@@ -3,7 +3,7 @@ export default function ProductoDetalle(producto){
         <article class="producto__article">
             <div class="producto__principal">
                 <div class="producto__img__container">
-                    <img class="producto__img"
+                    <img class="producto__img" id="producto-picture"
                         src="${producto.pictures[0].secure_url}" alt="${producto.title}">
                     <div class="section__producto__pictures" id="producto-pictures">    
                         <!-- renderPictures -->

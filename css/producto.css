@@ -35,7 +35,8 @@
 
 .producto__img {
     object-fit: contain;
-    object-position: top;
+    object-position: center;
+    height: 35vh;
 }
 
 .producto__data {
@@ -71,6 +72,13 @@
     width: 33%;
     max-height: 25vh;
     object-fit: contain;
+}
+
+.producto__picture:hover{
+    cursor: pointer;
+    opacity: 0.5;
+
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 .producto__buttons{
@@ -110,7 +118,7 @@
     }
 
     .producto__img {
-        width: 100%;        
+        width: 100%;
     }
 
     .producto__data {

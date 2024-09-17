@@ -64,6 +64,8 @@ async function renderProducto(producto){
         event.preventDefault();
         window.location.href = `../../pages/compartir.html?${productoId}`;        
     }); 
+
+    onImageClick(document.querySelectorAll(".producto__picture"));
 }
 
 function renderNotFound(){
@@ -75,5 +77,14 @@ function addProduct(){
     console.log("producto agregado en detalle")
     carritoService.SaveProduct(producto, 1);
 }
+
+function onImageClick(elements){
+    elements.forEach((element) => {
+        element.addEventListener('click', () =>{
+            $("#producto-picture").attr("src", element.src);
+        })
+    });
+}
+
 
 init();
