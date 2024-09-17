@@ -13,7 +13,10 @@ export default function ProductoDetalle(producto){
                     <h3 class="producto__name">${producto.title}</h3>
                     <p class="">${producto.warranty}</p>
                     <p class="producto__price">$ ${producto.price.toLocaleString("es-AR")}</p>
-                    <button class="button__primary">Agregar</button>
+                    <div class="producto__buttons">
+                        <button class="button__secondary"><img class="button__img" src="../../img/icons/add_cart.png" alt="Agregar icono">Agregar al carrito</button>
+                        <button class="button__primary"><img class="button__img" src="../../img/icons/share_light.png" alt="Compartir Icono">Compartir</button>
+                    </div>
                 </div>
             </div>
           

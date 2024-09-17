@@ -73,6 +73,12 @@
     object-fit: contain;
 }
 
+.producto__buttons{
+    display: flex;
+    margin: 2rem 0;
+    gap: 0.5rem;
+}
+
 .atributo__container{
     display: flex;
     justify-content: start;

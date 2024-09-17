@@ -14,8 +14,9 @@ body {
     outline: lightskyblue auto 1px;
 }
 
-
 .button__primary, .button__secondary, .button__danger {
+    display: inline-flex;
+    align-items: center;
     font-weight: 600;
     padding: 1rem 1.5rem;
     border: 0;
@@ -23,6 +24,7 @@ body {
     transition: 0.5s background-color;
     border-radius: 0.5rem;
     border: 1px solid transparent;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
 }
 
 .button__primary:hover, .button__secondary:hover, .button__danger:hover {
@@ -63,6 +65,14 @@ body {
     border: 1px solid var(--second-color);
 }
 
+.button__img{
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;    
+    -webkit-filter: drop-shadow(0px 1px 3px #222);
+    filter: drop-shadow(0px 1px 3px #222);
+}
+
 .body__container {
     height: 100%;
     min-height: 100vh;
@@ -95,10 +105,12 @@ body {
     width: 64px;
     height: 60px;
     border-radius: 5px;
+    box-shadow: 0px 0px 8px var(--second-color);
 }
 
 .header__logo:hover {
     opacity: 0.6;
+    box-shadow: 0px 0px 8px #000;
 }
 
 .header__title {
@@ -147,6 +159,7 @@ body {
     width: 16px;
     height: 16px;
 }
+
 
 .header__link {
     display: flex;
