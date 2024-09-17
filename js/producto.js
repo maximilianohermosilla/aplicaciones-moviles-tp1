@@ -1,29 +1,12 @@
 import carritoService from './services/carritoService.js'
+import productoService from './services/productoService.js'
 import apiMercadoLibre from './services/apiMercadoLibre.js'
 import ProductoDetalle from './components/producto-detalle.js';
 import ProductoAtributo from './components/producto-atributo.js';
 import ProductoPicture from './components/producto-picture.js';
 
-let carritoStorage = localStorage.getItem("productos")? JSON.parse(localStorage.getItem("productos")): [];
 let productoId = "";
 let producto;
-
-const getProducto = async (param) => {
-    producto = await apiMercadoLibre.GetItemPorId(param);
-    console.log(producto)
-    setTimeout(() => {
-        renderProducto(producto);
-    }, 100);   
-}
-
-function init(){
-    //getProductosCategoria(categoriaParam);
-    productoId = getParametro();
-    producto = getProducto(productoId);
-    setTimeout(() => { 
-        console.log(producto)
-    }, 500);
-}
 
 function getParamsFromHref(){
     let href = window.location.href;
@@ -41,6 +24,30 @@ function getParametro(){
     }
 }
 
+const getProducto = async (param) => {
+    producto = await apiMercadoLibre.GetItemPorId(param);
+    console.log(producto)
+    setTimeout(() => {
+        renderProducto(producto);
+    }, 100);   
+}
+
+function init(){
+    //getProductosCategoria(categoriaParam);
+    productoId = getParametro();
+    if(productoId == ""){
+        renderNotFound();
+    }
+    else{
+        producto = getProducto(productoId);
+        
+        if(producto == undefined){
+            renderNotFound();
+        }
+    }
+}
+
+
 async function renderProducto(producto){
     //console.log(productos)
     let productoContainer = document.getElementById("producto-container");
@@ -51,7 +58,22 @@ async function renderProducto(producto){
 
     let atributos = producto.attributes.map(item => ProductoAtributo(item))
     $("#producto-atributos").html(atributos);
+
+    productoService.OnButtonClick(document.querySelectorAll("#button-agregar"), addProduct);
+    $("#button-compartir").on("click", function(event) {
+        event.preventDefault();
+        window.location.href = `../../pages/compartir.html?${productoId}`;        
+    }); 
 }
 
+function renderNotFound(){
+    let productoContainer = document.getElementById("producto-container");
+    productoContainer.innerHTML = "<div class='home__container'><h1>No se encontraron resultados</h1></div>";
+}
+
+function addProduct(){
+    console.log("producto agregado en detalle")
+    carritoService.SaveProduct(producto, 1);
+}
 
 init();

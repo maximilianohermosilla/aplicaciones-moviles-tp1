@@ -1,5 +1,6 @@
 import apiMercadoLibre from './services/apiMercadoLibre.js'
 import carritoService from './services/carritoService.js'
+import productoService from './services/productoService.js'
 import CardProducto from './components/cardProducto.js'
 
 let listaProductos = [];
@@ -23,35 +24,15 @@ async function renderProductos(productos, categoria){
     productosContainer.innerHTML = '';
     productos.forEach(producto =>{ 
         productosContainer.innerHTML += CardProducto(producto);        
-    })  
-    onCardClick(document.querySelectorAll(".product__card"));
-}
-
-function onCardClick(elements){
-    elements.forEach((element) => {
-        element.addEventListener('click', () =>{
-            window.location.href = `../../pages/producto.html?${element.id}`;
-        })
-    });
-}
-
-function onButtonClick(elements){
-    elements.forEach((element) => {
-        element.addEventListener('click', () =>{
-            //window.location.href = `../../pages/producto.html?${element.id}`;
-            event.stopPropagation();
-            console.log("Button pressed");
-            addProduct(element.id.replace("button_", ''));
-        })
-    });
+    })
+    productoService.OnCardClick(document.querySelectorAll(".product__card"));
+    productoService.OnButtonClick(document.querySelectorAll(".button__agregar"), addProduct);
 }
 
 function addProduct(id){
-    console.log(id)
-    console.log(listaProductos)
+    console.log("producto agregado en main")
     const product = listaProductos.find((element) => id == element.id);  
     carritoService.SaveProduct(product, 1);
-    //getProductosCategoria(categoriaParam);
 }
 
 async function downloadImage(imageSrc, imageName) {

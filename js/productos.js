@@ -1,5 +1,6 @@
 import apiMercadoLibre from './services/apiMercadoLibre.js'
 import carritoService from './services/carritoService.js'
+import productoService from './services/productoService.js'
 import CardProducto from './components/cardProducto.js'
 
 let categoriaPrincipal = 'MLA1648';
@@ -8,7 +9,7 @@ let busquedaParam = "";
 let listaProductos;
 
 const getProductos = async (param) => {
-    let productos = await apiMercadoLibre.GetItems(categoriaPrincipal, param, '', '', '');
+    let productos = await apiMercadoLibre.GetItems(categoriaPrincipal, param, 10, '', '');
     console.log(productos)
     setTimeout(() => {
         listaProductos = productos.results;
@@ -17,7 +18,6 @@ const getProductos = async (param) => {
 }
 
 async function init(){
-    //getProductosCategoria(categoriaParam);
     busquedaParam = getParametroBusqueda();
     console.log(busquedaParam)
     listaProductos = await getProductos(busquedaParam);
@@ -26,14 +26,6 @@ async function init(){
         $("#input-busqueda").val(busquedaParam.replaceAll("%20", " "));
         console.log(listaProductos)
     }, 500);
-}
-
-function onCardClick(elements){
-    elements.forEach((element) => {
-        element.addEventListener('click', () =>{
-            window.location.href = `../../pages/producto.html?${element.id}`;
-        })
-    });
 }
 
 function getParamsFromHref(){
@@ -60,7 +52,8 @@ async function renderProductos(productos){
         productosContainer.innerHTML += CardProducto(producto);
         //getProductoEnCarrito(producto);
     })  
-    onCardClick(document.querySelectorAll(".product__card"));
+    productoService.OnCardClick(document.querySelectorAll(".product__card"));
+    productoService.OnButtonClick(document.querySelectorAll(".button__agregar"), addProduct);
 }
 
 function getProductoEnCarrito(product){
@@ -70,6 +63,12 @@ function getProductoEnCarrito(product){
         let articleId = `#${product.id.toString()}`;
         $(articleId).addClass("product__card__selected");
     }
+}
+
+function addProduct(id){
+    console.log("add product de productos")
+    const product = listaProductos.find((element) => id == element.id);  
+    carritoService.SaveProduct(product, 1);
 }
 
 init();

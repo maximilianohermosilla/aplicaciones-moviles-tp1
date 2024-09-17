@@ -14,12 +14,11 @@ export default function ProductoDetalle(producto){
                     <p class="">${producto.warranty}</p>
                     <p class="producto__price">$ ${producto.price.toLocaleString("es-AR")}</p>
                     <div class="producto__buttons">
-                        <button class="button__secondary"><img class="button__img" src="../../img/icons/add_cart.png" alt="Agregar icono">Agregar al carrito</button>
-                        <button class="button__primary"><img class="button__img" src="../../img/icons/share_light.png" alt="Compartir Icono">Compartir</button>
+                        <button class="button__secondary" id="button-agregar"><img class="button__img" src="../../img/icons/add_cart.png" alt="Agregar icono">Agregar al carrito</button>
+                        <button class="button__primary" id="button-compartir"><img class="button__img" src="../../img/icons/share_light.png" alt="Compartir Icono">Compartir</button>
                     </div>
                 </div>
-            </div>
-          
+            </div>          
         </article>
     `
 }

@@ -22,7 +22,7 @@ body {
     border: 0;
     box-shadow: 2px 3px 4px rgba(0, 0, 0, 0.5);
     transition: 0.5s background-color;
-    border-radius: 0.5rem;
+    border-radius: 0.25rem;
     border: 1px solid transparent;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
 }
@@ -128,7 +128,7 @@ body {
 }
 
 .input__busqueda{    
-    width: 35vw;
+    width: 33vw;
     border: 0;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;

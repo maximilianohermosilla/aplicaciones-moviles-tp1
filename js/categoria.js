@@ -1,5 +1,6 @@
 import apiMercadoLibre from './services/apiMercadoLibre.js'
 import carritoService from './services/carritoService.js'
+import productoService from './services/productoService.js'
 import CardProducto from './components/cardProducto.js'
 
 let carritoStorage = localStorage.getItem("productos")? JSON.parse(localStorage.getItem("productos")): [];
@@ -13,15 +14,8 @@ function init(){
     getProductosCategoria(categoriaParam);
 }
 
-function onCardClick(elements){
-    elements.forEach((element) => {
-        element.addEventListener('click', () =>{
-            addProduct(element.id);
-        })
-    });
-}
-
 function addProduct(id){
+    console.log("add product de categoria")
     const product = listaProductos.find((element) => id == element.id);  
     carritoService.SaveProduct(product, 1);
     getProductosCategoria(categoriaParam);
@@ -45,18 +39,22 @@ function getParametroCategoria(){
 async function getProductosCategoria(categoria){
     if(categoria != ""){
         let itemsPorCategoria = await apiMercadoLibre.Get(categoria);
-        let itemsId = itemsPorCategoria.results.map((item) => item.id);
-        console.log(itemsPorCategoria);
 
-        setTimeout(() => {
-            categoriaTitle = itemsPorCategoria.filters[0].values[0].name;
-            $("#categoria-title").html(categoriaTitle);
-            // let categoriaTitleTag = document.getElementById("categoria-title");
-            // categoriaTitleTag.innerHTML = categoriaTitle;
-            listaProductos = itemsPorCategoria.results;
-            renderProductos(itemsPorCategoria.results);
+        setTimeout(() => {            
+            if(itemsPorCategoria.results.length > 0){
+                categoriaTitle = itemsPorCategoria.filters[0].values[0].name;
+                $("#categoria-title").html(categoriaTitle);
+                listaProductos = itemsPorCategoria.results;
+                renderProductos(itemsPorCategoria.results);
+            }
+            else{                
+                $("#categoria-title").html("No se encontraron resultados");
+            }
         }, 100);       
-    }    
+    }
+    else{
+        $("#categoria-title").html("No se encontraron resultados");
+    }
 }
 
 async function renderProductos(productos){
@@ -67,7 +65,8 @@ async function renderProductos(productos){
         productosContainer.innerHTML += CardProducto(producto);
         getProductoEnCarrito(producto);
     })  
-    onCardClick(document.querySelectorAll(".product__card"));
+    productoService.OnCardClick(document.querySelectorAll(".product__card"));
+    productoService.OnButtonClick(document.querySelectorAll(".button__agregar"), addProduct);
 }
 
 function getProductoEnCarrito(product){
