@@ -19,9 +19,32 @@
         </header>
 
         <main class="main__container">
-            <section class="section__compartir" id="compartir-container">
-                <!-- renderCompartir -->
+            <h3 class="compartir__container" id="compartir-title"></h3>        
+            
+            <section class="compartir__container">
+                <div class="form__compartir" id="compartir-container"></div>
+                    <!-- renderCompartir -->
+                </div>                
+                <form class="form__compartir" id="form-compartir" action="">
+                    <div class="form__container">
+                        <label for="inputEmailEmisor">Email Emisor:</label>
+                        <input type="text" id="inputEmailEmisor"/>
+                    </div>
+                    <div class="form__container">
+                        <label for="inputEmailDestino">Email Destino:</label>
+                        <input type="text" id="inputEmailDestino"/>
+                    </div>
+                    <div class="form__container"></div>
+                        <label for="inputComentario">Comentario:</label>
+                        <textarea id="inputComentario" rows="10" cols="50"></textarea>
+                    </div>
+                </form>
             </section>
+
+            <div class="compartir__container compartir__acciones" id="compartir-acciones">
+                <button class="button__secondary" id="compartir-enviar">Enviar</button>
+                <button class="button__danger" id="compartir-cancelar">Cancelar</button>
+            </div>
         </main>
 
     </body>

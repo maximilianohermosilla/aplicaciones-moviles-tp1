@@ -1,4 +1,5 @@
 import apiMercadoLibre from './services/apiMercadoLibre.js'
+import RenderCompartirProducto from './components/compartirProducto.js'
 
 let productoId = "";
 let producto;
@@ -39,33 +40,53 @@ function init(){
             console.log(producto)
             if(producto == undefined){
                 renderNotFound();
-            }            
+            }  
+            else{
+                renderProductoCompartir(producto);
+            }          
         }, 500);
     }
 }
 
 
-async function renderProducto(producto){
-    //console.log(productos)
-    // let productoContainer = document.getElementById("producto-container");
-    // productoContainer.innerHTML = ProductoDetalle(producto);
+async function renderProductoCompartir(producto){
+    $("#compartir-title").html("Compartir con un amigo");
+    let productoContainer = document.getElementById("compartir-container");
+    productoContainer.innerHTML = RenderCompartirProducto(producto);
+    
+    let buttonEnviar = document.getElementById("compartir-enviar");
+    buttonEnviar.addEventListener('click', () =>{
+        event.preventDefault();
+        enviar();
+    })
 
-    // let productoPictures = producto.pictures.map(item => ProductoPicture(item))
-    // $("#producto-pictures").html(productoPictures);
-
-    // let atributos = producto.attributes.map(item => ProductoAtributo(item))
-    // $("#producto-atributos").html(atributos);
-
-    // productoService.OnButtonClick(document.querySelectorAll("#button-agregar"), addProduct);
-    // $("#button-compartir").on("click", function(event) {
-    //     event.preventDefault();
-    //     window.location.href = `../../pages/compartir.html?${productoId}`;        
-    // }); 
+    let buttonCancelar = document.getElementById("compartir-cancelar");
+    buttonCancelar.addEventListener('click', () =>{
+        event.preventDefault();
+        if (confirm("¿Desea cancelar y volver a la página anterior?") == true) {
+            history.back()
+        }
+    })
 }
 
 function renderNotFound(){
-    let compartirContainer = document.getElementById("compartir-container");
-    compartirContainer.innerHTML = "<div class='home__container'><h1>No se encontraron resultados</h1></div>";
+    $("#compartir-title").html("No se encontraron resultados");
+    $("#compartir-container").css("display", "none");
+    $("#compartir-acciones").css("display", "none");
+}
+
+function enviar(){
+    let urlEnviar = `mailto:${$("#inputEmailDestino").val()}?subject=Producto%20compartido%20desde%20UNAJ%20PC%20Store
+                    &body=Mensaje: ${$("#inputComentario").val()}
+                    %0D%0A
+                    Emisor: ${$("#inputEmailEmisor").val()}
+                    %0D%0A
+                    Producto: ${producto.title}
+                    %0D%0A
+                    Precio: $ ${producto.price}
+                    %0D%0A
+                    `;
+    window.location.href = urlEnviar;
 }
 
 init();

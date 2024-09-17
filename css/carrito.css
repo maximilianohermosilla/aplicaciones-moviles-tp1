@@ -26,6 +26,7 @@
 .carrito__span__precio{
     font-weight: 800;
     color: green;
+    white-space: nowrap;
 }
 
 .carrito__acciones{
