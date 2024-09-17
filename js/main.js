@@ -15,7 +15,7 @@ async function getProductosCategoria(categoria){
             renderProductos(itemsPorCategoria.results, categoria);
         }, 100);
         
-        onButtonClick(document.querySelectorAll(".button__agregar"));
+        //onButtonClick(document.querySelectorAll(".button__agregar"));
     }    
 }
 
@@ -25,8 +25,6 @@ async function renderProductos(productos, categoria){
     productos.forEach(producto =>{ 
         productosContainer.innerHTML += CardProducto(producto);        
     })
-    productoService.OnCardClick(document.querySelectorAll(".product__card"));
-    productoService.OnButtonClick(document.querySelectorAll(".button__agregar"), addProduct);
 }
 
 function addProduct(id){
@@ -47,13 +45,16 @@ async function downloadImage(imageSrc, imageName) {
     document.body.removeChild(link)
 }
 
-getProductosCategoria("MLA1692");
-setTimeout(() => {
-    getProductosCategoria("MLA1693");    
-}, 100);
-setTimeout(() => {
+function init(){
+    getProductosCategoria("MLA1692");
+    getProductosCategoria("MLA1693");
     getProductosCategoria("MLA1694");    
-}, 100);
-setTimeout(() => {
     getProductosCategoria("MLA1672");    
-}, 100);
+    setTimeout(() => {
+        productoService.OnCardClick(document.querySelectorAll(".product__card"));
+        productoService.OnButtonClick(document.querySelectorAll(".button__agregar"), addProduct);
+        productoService.OnButtonCompartirClick(document.querySelectorAll(".button__compartir"));
+    }, 1000);
+}
+
+init();

@@ -24,7 +24,12 @@ function saveProduct(product, cantidad){
     console.log(product)
     const repeat = carritoStorage.some((repeatProduct) => repeatProduct.id === product.id);
     if(repeat){
-        removeProduct(product.id);        
+        //removeProduct(product.id);
+        carritoStorage.map((prod) => {
+            if (prod.id == product.id){
+                prod.cantidad += cantidad;
+            }            
+        });
     } else{
         carritoStorage.push({
             id: product.id,

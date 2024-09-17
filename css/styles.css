@@ -353,11 +353,16 @@ body {
     align-items: center;
 }
 
-.button__agregar{
-    padding: 0 0.75rem;
+.button__agregar, .button__compartir{
+    padding: 0 0.5rem;
     height: 2rem;
     font-weight: 400;
     z-index: 50;
+}
+
+.button__agregar:hover, .button__compartir:hover{
+    background: #000;
+    border: 1px solid #000;
 }
 
 .product__price {

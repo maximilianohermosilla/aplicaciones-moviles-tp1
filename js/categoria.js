@@ -67,6 +67,7 @@ async function renderProductos(productos){
     })  
     productoService.OnCardClick(document.querySelectorAll(".product__card"));
     productoService.OnButtonClick(document.querySelectorAll(".button__agregar"), addProduct);
+    productoService.OnButtonCompartirClick(document.querySelectorAll(".button__compartir"));
 }
 
 function getProductoEnCarrito(product){

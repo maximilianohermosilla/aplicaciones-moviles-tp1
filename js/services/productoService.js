@@ -15,9 +15,19 @@ function onButtonClick(elements, callback){
     });
 }
 
+function onButtonCompartirClick(elements, callback){
+    elements.forEach((element) => {
+        element.addEventListener('click', () =>{
+            event.stopPropagation();
+            window.location.href = `../../pages/compartir.html?${element.id.replace("button_compartir_", "")}`;
+        })
+    });
+}
+
 const productoService = {
     OnCardClick: onCardClick,
-    OnButtonClick: onButtonClick
+    OnButtonClick: onButtonClick,
+    OnButtonCompartirClick: onButtonCompartirClick
 };
 
 export default productoService;
