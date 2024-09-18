@@ -1,4 +1,5 @@
 import carritoService from './services/carritoService.js'
+import historialService from './services/historialService.js'
 import productoService from './services/productoService.js'
 import apiMercadoLibre from './services/apiMercadoLibre.js'
 import ProductoDetalle from './components/producto-detalle.js';
@@ -65,6 +66,7 @@ async function renderProducto(producto){
         window.location.href = `../../pages/compartir.html?${productoId}`;        
     }); 
 
+    addProductoHistorial(producto)
     onImageClick(document.querySelectorAll(".producto__picture"));
 }
 
@@ -74,8 +76,11 @@ function renderNotFound(){
 }
 
 function addProduct(){
-    console.log("producto agregado en detalle")
     carritoService.SaveProduct(producto, 1);
+}
+
+function addProductoHistorial(){
+    historialService.SaveProduct(producto);
 }
 
 function onImageClick(elements){
