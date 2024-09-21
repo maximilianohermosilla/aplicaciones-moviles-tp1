@@ -29,6 +29,20 @@
     white-space: nowrap;
 }
 
+.carrito__close{
+    height: 100%;
+    display: flex;
+    align-items: start;
+    align-self: normal
+}
+
+.carrito__precio{
+    margin: auto;
+    margin-right: 0;
+    padding-right: 0.5rem;
+    text-align: end;
+}
+
 .carrito__acciones{
     margin: 1rem 0;
 }

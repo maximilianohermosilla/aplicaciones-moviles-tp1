@@ -4,7 +4,6 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 100%;
     box-shadow: -5px 0px 5px rgba(0, 0, 0, 0.5);
     background-color: #ebebeb;
     padding: 2rem 0;
@@ -19,14 +18,32 @@
     padding: 1rem;
     margin-bottom: 1rem;
     border: 1px solid lightgray;
-    max-width: 80vw;
+    max-width: 90%;
     background-color: #FFF;
+}
+
+.historial__card__date{
+    font-size: 0.75rem;
+}
+
+.historial__precio{
+    margin: auto;
+    margin-right: 0;
+    padding-right: 0.5rem;
+    text-align: end;
 }
 
 .historial__span__precio{
     font-weight: 800;
     color: green;
     white-space: nowrap;
+}
+
+.historial__close{
+    height: 100%;
+    display: flex;
+    align-items: start;
+    align-self: normal
 }
 
 .historial__acciones{

@@ -57,9 +57,12 @@ function removeProduct(id){
 function clearProduct(id){
     const productoId = carritoStorage.find((element) => element.id == id);
 
+    console.log(id)
+    console.log(carritoStorage)
     carritoStorage = carritoStorage.filter((carrito) => {
         return carrito !== productoId;
     });
+    console.log(carritoStorage)
 
     saveLocalStorage(carritoStorage);
     if (!carritoStorage.length > 0){ 

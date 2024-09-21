@@ -34,7 +34,6 @@ const getProducto = async (param) => {
 }
 
 function init(){
-    //getProductosCategoria(categoriaParam);
     productoId = getParametro();
     if(productoId == ""){
         renderNotFound();
@@ -51,28 +50,35 @@ function init(){
 
 async function renderProducto(producto){
     //console.log(productos)
-    let productoContainer = document.getElementById("producto-container");
-    productoContainer.innerHTML = ProductoDetalle(producto);
+    if (producto){
+        let productoContainer = document.getElementById("producto-container");
+        productoContainer.innerHTML = ProductoDetalle(producto);
 
-    let productoPictures = producto.pictures.map(item => ProductoPicture(item))
-    $("#producto-pictures").html(productoPictures);
+        let productoPictures = producto.pictures.map(item => ProductoPicture(item))
+        $("#producto-pictures").html(productoPictures);
 
-    let atributos = producto.attributes.map(item => ProductoAtributo(item))
-    $("#producto-atributos").html(atributos);
+        let atributos = producto.attributes.map(item => ProductoAtributo(item))
+        $("#producto-atributos").html(atributos);
 
-    productoService.OnButtonClick(document.querySelectorAll("#button-agregar"), addProduct);
-    $("#button-compartir").on("click", function(event) {
-        event.preventDefault();
-        window.location.href = `../../pages/compartir.html?${productoId}`;        
-    }); 
+        productoService.OnButtonClick(document.querySelectorAll("#button-agregar"), addProduct);
+        $("#button-compartir").on("click", function(event) {
+            event.preventDefault();
+            window.location.href = `../../pages/compartir.html?${productoId}`;        
+        }); 
 
-    addProductoHistorial(producto)
-    onImageClick(document.querySelectorAll(".producto__picture"));
+        addProductoHistorial(producto)
+        onImageClick(document.querySelectorAll(".producto__picture"));
+    }
+    else{
+        renderNotFound();
+    }
+    
 }
 
 function renderNotFound(){
     let productoContainer = document.getElementById("producto-container");
-    productoContainer.innerHTML = "<div class='home__container'><h1>No se encontraron resultados</h1></div>";
+    productoContainer.innerHTML = "<div class='home__container producto__article'><h1>No se encontró el producto</h1></div>";
+    $("#producto-atributos").css("display", "none");
 }
 
 function addProduct(){
