@@ -19,7 +19,7 @@ function addProduct(id){
 function saveProduct(product){
     console.log(product)
     let date = new Date();
-    let fecha = date.toLocaleString("es-AR");
+    let fecha = date.toLocaleString("es-AR", { hour12: false });
     const repeat = historialStorage.some((repeatProduct) => repeatProduct.id === product.id);
     console.log(repeat);
     if(repeat){
