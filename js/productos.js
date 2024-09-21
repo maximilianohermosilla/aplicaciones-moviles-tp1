@@ -96,7 +96,7 @@ function getFilters(productos){
         console.log(priceFilter)
 
         if(categoryFilter){
-            $("#filter-category-title").html(categoryFilter.name)
+            $("#filter-category-title").html(categoryFilter.name + ` <img src="../img/icons/down-arrow-dark.png" width="12" alt="Down Arrow">`)
             let linksOrdenados = categoryFilter.values.slice(0, 10);
             let links = linksOrdenados.map(item => LinkFilter(item, categoryFilter.id));
             setTimeout(() => {
@@ -105,7 +105,7 @@ function getFilters(productos){
         }
         
         if(brandFilter){
-            $("#filter-brand-title").html(brandFilter.name)
+            $("#filter-brand-title").html(brandFilter.name + ` <img src="../img/icons/down-arrow-dark.png" width="12" alt="Down Arrow">`)
             let linksOrdenados = brandFilter.values.slice(0, 10);
             let links = linksOrdenados.map(item => LinkFilter(item, brandFilter.id));
             setTimeout(() => {
@@ -114,7 +114,7 @@ function getFilters(productos){
         }
         
         if(priceFilter){
-            $("#filter-price-title").html(priceFilter.name)
+            $("#filter-price-title").html(priceFilter.name + ` <img src="../img/icons/down-arrow-dark.png" width="12" alt="Down Arrow">`)
             let linksOrdenados = priceFilter.values.slice(0, 10);
             let links = linksOrdenados.map(item => LinkFilter(item, priceFilter.id));
             setTimeout(() => {
@@ -123,7 +123,38 @@ function getFilters(productos){
         }
 
         setTimeout(() => {
-            onFilterClick(document.querySelectorAll(".link__filter"));            
+            onFilterClick(document.querySelectorAll(".link__filter"));
+            onFilterClick(document.querySelectorAll(".link__filter"));
+            
+        $("#filter-category-container").click(function () {
+            event.stopPropagation();
+            if($("#filter-category-container").hasClass("filters__mobile__active")){
+                $(this).removeClass("filters__mobile__active");   
+            }
+            else{
+                $(this).addClass("filters__mobile__active");
+            }
+        });
+
+        $("#filter-brand-container").click(function () {
+            event.stopPropagation();
+            if($("#filter-brand-container").hasClass("filters__mobile__active")){
+                $(this).removeClass("filters__mobile__active");   
+            }
+            else{
+                $(this).addClass("filters__mobile__active");
+            }
+        });
+
+        $("#filter-price-container").click(function () {
+            event.stopPropagation();
+            if($("#filter-price-container").hasClass("filters__mobile__active")){
+                $(this).removeClass("filters__mobile__active");   
+            }
+            else{
+                $(this).addClass("filters__mobile__active");
+            }
+        });
         }, 1000);
     }
 }
