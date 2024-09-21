@@ -10,13 +10,15 @@ let categoriaPrincipal = 'MLA1648';
 let carritoStorage = localStorage.getItem("productos")? JSON.parse(localStorage.getItem("productos")): [];
 let busquedaParam = "";
 let filters = "";
+let offset = 0;
 let filtrosSeleccionados = [];
 let listaProductos;
 
 const getProductos = async (param) => {
-    let productos = await apiMercadoLibre.GetItems(categoriaPrincipal, param, 10, '', filters);
-    console.log(productos)
+    let productos = await apiMercadoLibre.GetItems(categoriaPrincipal, param, 10, offset, filters);
     setTimeout(() => {
+        let disabledButton = offset == 0? "disabled": "";
+        $("#pagination-prev").prop("disabled", disabledButton);
         listaProductos = productos.results;
         renderProductos(productos.results);
         getFilters(productos);
@@ -26,6 +28,8 @@ const getProductos = async (param) => {
             $("#productos-filters").html("Filtros: " + filtrosSeleccionados.map(x => " " + x));
         }
         console.log(listaProductos)
+        window.scrollTo(0, 0);
+
     }, 100);   
 }
 
@@ -48,7 +52,18 @@ function getParametroBusqueda(){
 async function init(){
     busquedaParam = getParametroBusqueda();
     console.log(busquedaParam)
-    listaProductos = await getProductos(busquedaParam);    
+    listaProductos = await getProductos(busquedaParam);
+
+
+    $("#pagination-prev").on("click", async function(){
+        offset--;
+        listaProductos = await getProductos(busquedaParam);
+    });
+    
+    $("#pagination-next").on("click", async function(){
+        offset++;
+        listaProductos = await getProductos(busquedaParam);
+    });
 }
 
 async function renderProductos(productos){
@@ -62,6 +77,7 @@ async function renderProductos(productos){
     productoService.OnCardClick(document.querySelectorAll(".product__card"));
     productoService.OnButtonClick(document.querySelectorAll(".button__agregar"), addProduct);
     productoService.OnButtonCompartirClick(document.querySelectorAll(".button__compartir"));
+    $("#pagination-offset").html((offset + 1).toString())
 }
 
 function getProductoEnCarrito(product){

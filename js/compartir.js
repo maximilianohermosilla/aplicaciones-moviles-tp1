@@ -1,5 +1,6 @@
 import apiMercadoLibre from './services/apiMercadoLibre.js'
 import RenderCompartirProducto from './components/compartirProducto.js'
+import Validator from './utils/validations.js'
 
 let productoId = "";
 let producto;
@@ -75,18 +76,37 @@ function renderNotFound(){
     $("#compartir-acciones").css("display", "none");
 }
 
+
+function validarCampos(){
+    let errores = "";
+
+    errores += Validator.ValidarCampoRequerido($("#inputEmailEmisor").val(), "Email Emisor");
+    errores += Validator.ValidarCampoEmail($("#inputEmailEmisor").val(), "Email Emisor");    
+    errores += Validator.ValidarCampoRequerido($("#inputEmailDestino").val(), "Email Destino");
+    errores += Validator.ValidarCampoEmail($("#inputEmailDestino").val(), "Email Destino");
+
+    return errores;
+}
+
 function enviar(){
-    let urlEnviar = `mailto:${$("#inputEmailDestino").val()}?subject=Producto%20compartido%20desde%20UNAJ%20PC%20Store
-                    &body=Mensaje: ${$("#inputComentario").val()}
-                    %0D%0A
-                    Emisor: ${$("#inputEmailEmisor").val()}
-                    %0D%0A
-                    Producto: ${producto.title}
-                    %0D%0A
-                    Precio: $ ${producto.price}
-                    %0D%0A
-                    `;
-    window.location.href = urlEnviar;
+    let error = validarCampos();
+
+    if(error != ""){
+        alert(error);
+    }
+    else{
+        let urlEnviar = `mailto:${$("#inputEmailDestino").val()}?subject=Producto%20compartido%20desde%20UNAJ%20PC%20Store
+                        &body=Mensaje: ${$("#inputComentario").val()}
+                        %0D%0A
+                        Emisor: ${$("#inputEmailEmisor").val()}
+                        %0D%0A
+                        Producto: ${producto.title}
+                        %0D%0A
+                        Precio: $ ${producto.price}
+                        %0D%0A
+                        `;
+        window.location.href = urlEnviar;
+    }
 }
 
 init();

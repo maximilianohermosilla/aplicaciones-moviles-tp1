@@ -14,7 +14,7 @@ body {
     outline: lightskyblue auto 1px;
 }
 
-.button__primary, .button__secondary, .button__danger {
+.button__primary, .button__secondary, .button__danger, .button__pagination {
     display: inline-flex;
     align-items: center;
     font-weight: 600;
@@ -488,6 +488,30 @@ body {
     margin-left: -70px;
     margin-top: 45px;
     box-shadow: 1px 1px 2px #000;
+}
+
+.pagination__container{
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.button__pagination:hover{
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 1px 1px 2px #000;
+}
+
+.button__pagination:disabled{
+    opacity: 0.3;
+}
+
+.button__previous{
+    transform: rotate(90deg);
+}
+
+.button__next{
+    transform: rotate(270deg);
 }
 
 @media screen and (min-width: 1024px) {
