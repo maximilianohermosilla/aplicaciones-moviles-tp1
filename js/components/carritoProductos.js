@@ -4,6 +4,7 @@ export default function RenderCarrito(producto){
         <div class="carrito__img">
             <div class="carrito__card__title">${(producto.cantidad)} x </div>
             <img cross-origin="use-credentials" id="producto-img-${producto.id}" src="${producto.thumbnail}" class="img__carrito">
+            <a href="../../pages/producto.html?${producto.id}"/> <img src="../../img/icons/detail_black.png" alt="Detalle icono" width="16" > Detalle</a>
         </div>
         <div class="carrito__body">
             <div class="div__body">

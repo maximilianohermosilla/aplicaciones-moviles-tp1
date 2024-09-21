@@ -2,8 +2,9 @@ export default function RenderHistorial(producto){
     return `
     <div class="historial__producto" id="${producto.id}">
         <div class="historial__img">
-            <div class="historial__card__date">${(producto.fecha)} </div>
+            <div class="historial__card__date">${(producto.fecha)}</div>
             <img cross-origin="use-credentials" id="producto-img-${producto.id}" src="${producto.thumbnail}" class="img__historial">
+            <a href="../../pages/producto.html?${producto.id}"/> <img src="../../img/icons/detail_black.png" alt="Detalle icono" width="16" > Detalle</a>
         </div>
         <div class="historial__body">
             <div class="div__body">

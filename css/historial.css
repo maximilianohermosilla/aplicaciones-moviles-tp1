@@ -9,6 +9,31 @@
     padding: 2rem 0;
 }
 
+.historial__img{
+    display: flex;
+    flex-direction: column;    
+    text-align: start;    
+    align-items: start;
+}
+
+.historial__img a{
+    display: flex;
+    gap: 5px;
+    text-decoration: none;
+    color: var(--first-color);
+    align-self: start;
+    align-items: start;
+    padding: 5px 0;
+}
+
+.historial__img img{
+    align-self: center;
+}
+
+.historial__img a:hover{
+    opacity: 0.5;
+}
+
 .historial__producto{
     display: flex;
     justify-content: space-between;
