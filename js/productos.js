@@ -16,6 +16,7 @@ let listaProductos;
 
 const getProductos = async (param) => {
     let productos = await apiMercadoLibre.GetItems(categoriaPrincipal, param, 10, offset, filters);
+    console.log(productos)
     setTimeout(() => {
         let disabledButton = offset == 0? "disabled": "";
         $("#pagination-prev").prop("disabled", disabledButton);
@@ -139,7 +140,6 @@ function getFilters(productos){
         }
 
         setTimeout(() => {
-            onFilterClick(document.querySelectorAll(".link__filter"));
             onFilterClick(document.querySelectorAll(".link__filter"));
             
         $("#filter-category-container").click(function () {
