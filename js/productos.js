@@ -28,6 +28,7 @@ const getProductos = async (param) => {
             $("#productos-filters").html("Filtros: " + filtrosSeleccionados.map(x => " " + x));
         }
         console.log(listaProductos)
+        renderAds();
         window.scrollTo(0, 0);
 
     }, 100);   
@@ -90,7 +91,6 @@ function getProductoEnCarrito(product){
 }
 
 function addProduct(id){
-    console.log("add product de productos")
     const product = listaProductos.find((element) => id == element.id);  
     carritoService.SaveProduct(product, 1);
 }
@@ -185,6 +185,10 @@ function onFilterClick(elements){
             listaProductos = await getProductos(busquedaParam);    
         })
     });
+}
+
+function renderAds(){
+    $("#productos-ads").html("<img src='../../img/publicidad/ad_samsung.jpeg' /> <img src='../../img/publicidad/ad_bosch.jpeg' />");
 }
 
 init();
