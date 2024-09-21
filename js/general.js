@@ -47,4 +47,19 @@ setTimeout(() => {
         let inputBusqueda = $("#input-busqueda").val();
         window.location.href = `../../pages/productos.html?search=${inputBusqueda}`;        
     });
+
+    $("#nav-mobile").click(function () {
+        event.stopPropagation();
+        if($("#nav-mobile").hasClass("nav__mobile__active")){
+            console.log("Borrar")
+            $(this).removeClass("nav__mobile__active");   
+        }
+        else{
+            $(this).addClass("nav__mobile__active");
+        }
+    });
+
+    $(".body__container").click(function () {
+        $("#nav-mobile").removeClass("nav__mobile__active");   
+    });
 }, 500);
