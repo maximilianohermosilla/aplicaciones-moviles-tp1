@@ -67,6 +67,19 @@
     overflow-y: auto;
 }
 
+.filters__mobile label{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 5px;
+}
+
+.filters__mobile label:hover{
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
 .filters__mobile__active .filters__list__mobile {
     display: flex;
 }
@@ -80,6 +93,15 @@
 
     .filters__container{     
         flex-direction: column;
+    }
+
+    .filters__mobile label{
+        margin: 0.25rem 0;
+        padding: 0;
+    }
+    
+    .filters__mobile label:hover{
+        background-color: transparent;
     }
 
     .filters__list__mobile{

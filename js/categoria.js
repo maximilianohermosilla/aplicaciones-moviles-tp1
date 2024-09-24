@@ -63,7 +63,7 @@ async function renderProductos(productos){
     productosContainer.innerHTML = '';
     productos.forEach(producto =>{ 
         productosContainer.innerHTML += CardProducto(producto);
-        getProductoEnCarrito(producto);
+        //getProductoEnCarrito(producto);
     })  
     productoService.OnCardClick(document.querySelectorAll(".product__card"));
     productoService.OnButtonClick(document.querySelectorAll(".button__agregar"), addProduct);
