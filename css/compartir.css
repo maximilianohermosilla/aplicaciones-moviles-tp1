@@ -93,6 +93,12 @@
     outline: lightskyblue auto 1px;
 }
 
+.input__error{
+    display: none;
+    color: red;
+    margin: 0;
+}
+
 @media screen and (min-width: 478px){
     .compartir__producto{     
         flex-direction: row;

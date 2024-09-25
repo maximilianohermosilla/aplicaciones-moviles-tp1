@@ -85,5 +85,12 @@
 }
 
 .buttons__encuesta button{
-   
+    width: 100%;
+    justify-content: center;
+}
+
+.input__error{
+    display: none;
+    color: red;
+    margin: 0;
 }

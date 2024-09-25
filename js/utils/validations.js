@@ -10,7 +10,7 @@ function validarCampoRequerido(input, nombre){
 
 function validarCampoCaracteres(input, nombre){
     if (!/^[a-zA-Z]*$/g.test(input)){
-        return `El campo ${nombre} solo acepta caracteres de la “a-z” y “A-Z”\n`;
+        return `El campo ${nombre} solo acepta caracteres de la “a-z” y “A-Z”.\n`;
     }
     else{
         return "";
@@ -20,8 +20,8 @@ function validarCampoCaracteres(input, nombre){
 function validarCampoFecha(input, nombre){
     let fechaValidada = Date.parse(input.split('-').reverse().join('-'));
 
-    if(isNaN(fechaValidada)){
-        return `El campo ${nombre} no contiene una fecha válida con formato DD-MM-AAAA\n`;
+    if(input != "" && isNaN(fechaValidada)){
+        return `El campo ${nombre} no contiene una fecha válida con formato DD-MM-AAAA.\n`;
     }
     else{
         return "";
@@ -30,8 +30,8 @@ function validarCampoFecha(input, nombre){
 
 function validarCampoEmail(input, nombre){
     var re = /\S+@\S+\.\S+/;
-    if(!re.test(input)){
-        return `El campo ${nombre} no contiene una dirección de correo válida\n`;
+    if(input != "" && !re.test(input)){
+        return `El campo ${nombre} no contiene una dirección de correo válida.\n`;
     }
     else{
         return "";

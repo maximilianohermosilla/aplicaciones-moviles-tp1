@@ -12,7 +12,7 @@ function getParamsFromHref(){
 
 function getParametro(){
     let parametros = getParamsFromHref();
-    console.log(parametros)
+    
     if(parametros != undefined && parametros != ""){
         return parametros.split('&')[0];
     }
@@ -23,7 +23,7 @@ function getParametro(){
 
 const getProducto = async (param) => {
     producto = await apiMercadoLibre.GetItemPorId(param);
-    console.log(producto)
+    
     setTimeout(() => {
         //renderProducto(producto);
     }, 100);   
@@ -38,7 +38,6 @@ function init(){
     else{
         producto = getProducto(productoId);
         setTimeout(() => {
-            console.log(producto)
             if(producto == undefined){
                 renderNotFound();
             }  
@@ -79,20 +78,42 @@ function renderNotFound(){
 
 function validarCampos(){
     let errores = "";
+    let inputEmisor = "#inputEmailEmisor"
+    let inputDestino = "#inputEmailDestino"
 
-    errores += Validator.ValidarCampoRequerido($("#inputEmailEmisor").val(), "Email Emisor");
-    errores += Validator.ValidarCampoEmail($("#inputEmailEmisor").val(), "Email Emisor");    
-    errores += Validator.ValidarCampoRequerido($("#inputEmailDestino").val(), "Email Destino");
-    errores += Validator.ValidarCampoEmail($("#inputEmailDestino").val(), "Email Destino");
+    let errorEmailEmisorRequired = Validator.ValidarCampoRequerido($(inputEmisor).val(), "Email Emisor");
+    let errorEmailEmisorInvalid = Validator.ValidarCampoEmail($(inputEmisor).val(), "Email Emisor");    
+    let errorEmailDestinoRequired = Validator.ValidarCampoRequerido($(inputDestino).val(), "Email Destino");
+    let errorEmailDestinoInvalid = Validator.ValidarCampoEmail($(inputDestino).val(), "Email Destino");
+
+    errores += validarInputError(inputEmisor, "required", errorEmailEmisorRequired);
+    errores += validarInputError(inputEmisor, "invalid", errorEmailEmisorInvalid);
+    errores += validarInputError(inputDestino, "required", errorEmailDestinoRequired);
+    errores += validarInputError(inputDestino, "invalid", errorEmailDestinoInvalid);
 
     return errores;
 }
 
+function validarInputError(input, type, message){
+    let inputError = `${input}-${type}`;
+
+    if(message != ""){
+        $(inputError).html(message);
+        $(inputError).css("display", "block");
+    }
+    else{
+        $(inputError).html("");
+        $(inputError).css("display", "none");
+    }
+    
+    return message;
+}
+
 function enviar(){
     let error = validarCampos();
-
+    
     if(error != ""){
-        alert(error);
+        //alert(error);
     }
     else{
         let urlEnviar = `mailto:${$("#inputEmailDestino").val()}?subject=Producto%20compartido%20desde%20UNAJ%20PC%20Store

@@ -1,3 +1,4 @@
+import Validator from './utils/validations.js'
 
 let nombre = "";
 let apellido = "";
@@ -53,7 +54,7 @@ function enviarEncuesta(){
     let error = validarCampos();
 
     if(error != ""){
-        alert(error);
+        //alert(error);
     }
     else{
         alert(`Datos:
@@ -87,61 +88,48 @@ function obtenerValores(){
 
 function validarCampos(){
     let errores = "";
+    let inputNombre = "#inputNombre";
+    let inputApellido = "#inputApellido";
+    let inputFechaNacimiento = "#inputFechaNacimiento";
+    let inputSexo = "#inputSexo";
+    let inputEmail = "#inputEmail";
 
-    errores += validarCampoRequerido(nombre, "Nombre");
-    errores += validarCampoCaracteres(nombre, "Nombre");
+    let errorInputNombreRequired = Validator.ValidarCampoRequerido($(inputNombre).val(), "Nombre");
+    let errorInputNombreInvalid = Validator.ValidarCampoCaracteres($(inputNombre).val(), "Nombre");
+    let errorInputApellidoRequired = Validator.ValidarCampoRequerido($(inputApellido).val(), "Apellido");
+    let errorInputApellidoInvalid = Validator.ValidarCampoCaracteres($(inputApellido).val(), "Apellido");
+    let errorInputFechaNacimientoRequired = Validator.ValidarCampoRequerido($(inputFechaNacimiento).val(), "Fecha de Nacimiento");
+    let errorInputFechaNacimientoInvalid = Validator.ValidarCampoFecha($(inputFechaNacimiento).val(), "Fecha de Nacimiento");
+    let errorInputSexoRequired = Validator.ValidarCampoRequerido($(inputSexo).val(), "Sexo");
+    let errorInputSexoInvalid = Validator.ValidarCampoCaracteres($(inputSexo).val(), "Sexo");
+    let errorInputEmailRequired = Validator.ValidarCampoRequerido($(inputEmail).val(), "Email");
+    let errorInputEmailInvalid = Validator.ValidarCampoEmail($(inputEmail).val(), "Email");
 
-    errores += validarCampoRequerido(apellido, "Apellido");
-    errores += validarCampoCaracteres(apellido, "Apellido");
-
-    errores += validarCampoRequerido(fechaNacimiento, "Fecha de Nacimiento");
-    errores += validarCampoFecha(fechaNacimiento, "Fecha de Nacimiento");
-
-    errores += validarCampoRequerido(sexo, "Sexo");
-
-    errores += validarCampoRequerido(valoracion, "Valoración");
-
-    errores += validarCampoRequerido(email, "Email");
-    errores += validarCampoEmail(email, "Email");
+    errores += validarInputError(inputNombre, "required", errorInputNombreRequired);
+    errores += validarInputError(inputNombre, "invalid", errorInputNombreInvalid);
+    errores += validarInputError(inputApellido, "required", errorInputApellidoRequired);
+    errores += validarInputError(inputApellido, "invalid", errorInputApellidoInvalid);
+    errores += validarInputError(inputFechaNacimiento, "required", errorInputFechaNacimientoRequired);
+    errores += validarInputError(inputFechaNacimiento, "invalid", errorInputFechaNacimientoInvalid);
+    errores += validarInputError(inputSexo, "required", errorInputSexoRequired);
+    errores += validarInputError(inputSexo, "invalid", errorInputSexoInvalid);
+    errores += validarInputError(inputEmail, "required", errorInputEmailRequired);
+    errores += validarInputError(inputEmail, "invalid", errorInputEmailInvalid);
 
     return errores;
 }
 
-function validarCampoRequerido(input, nombre){
-    if(input == ""){
-        return `El campo ${nombre} es obligatorio\n`;
+function validarInputError(input, type, message){
+    let inputError = `${input}-${type}`;
+
+    if(message != ""){
+        $(inputError).html(message);
+        $(inputError).css("display", "block");
     }
     else{
-        return "";
+        $(inputError).html("");
+        $(inputError).css("display", "none");
     }
-}
-
-function validarCampoCaracteres(input, nombre){
-    if (!/^[a-zA-Z]*$/g.test(input)){
-        return `El campo ${nombre} solo acepta caracteres de la “a-z” y “A-Z”\n`;
-    }
-    else{
-        return "";
-    }
-}
-
-function validarCampoFecha(input, nombre){
-    let fechaValidada = Date.parse(input.split('-').reverse().join('-'));
-
-    if(isNaN(fechaValidada)){
-        return `El campo ${nombre} no contiene una fecha válida con formato DD-MM-AAAA\n`;
-    }
-    else{
-        return "";
-    }
-}
-
-function validarCampoEmail(input, nombre){
-    var re = /\S+@\S+\.\S+/;
-    if(!re.test(input)){
-        return `El campo ${nombre} no contiene una dirección de correo válida\n`;
-    }
-    else{
-        return "";
-    }
+    
+    return message;
 }
