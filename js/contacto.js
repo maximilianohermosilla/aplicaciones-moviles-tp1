@@ -14,7 +14,7 @@ async function initMap() {
     const marker = new AdvancedMarkerElement({
         map: map,
         position: catedralLaPlata,
-        title: "Uluru",
+        title: "UNAJ PC Store",
     });
 }
 

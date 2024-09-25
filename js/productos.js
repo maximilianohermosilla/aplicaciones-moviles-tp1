@@ -142,35 +142,38 @@ function getFilters(productos){
         setTimeout(() => {
             onFilterClick(document.querySelectorAll(".link__filter"));
             
-        $("#filter-category-container").click(function () {
-            event.stopPropagation();
-            if($("#filter-category-container").hasClass("filters__mobile__active")){
-                $(this).removeClass("filters__mobile__active");   
-            }
-            else{
-                $(this).addClass("filters__mobile__active");
-            }
-        });
+            $("#filter-category-container").unbind("click")
+            $("#filter-category-container").click(function () {
+                event.stopPropagation();
+                if($("#filter-category-container").hasClass("filters__mobile__active")){
+                    $(this).removeClass("filters__mobile__active");   
+                }
+                else{
+                    $(this).addClass("filters__mobile__active");
+                }
+            });
 
-        $("#filter-brand-container").click(function () {
-            event.stopPropagation();
-            if($("#filter-brand-container").hasClass("filters__mobile__active")){
-                $(this).removeClass("filters__mobile__active");   
-            }
-            else{
-                $(this).addClass("filters__mobile__active");
-            }
-        });
+            $("#filter-brand-container").unbind("click")
+            $("#filter-brand-container").click(function () {
+                event.stopPropagation();
+                if($("#filter-brand-container").hasClass("filters__mobile__active")){
+                    $(this).removeClass("filters__mobile__active");   
+                }
+                else{
+                    $(this).addClass("filters__mobile__active");
+                }
+            });
 
-        $("#filter-price-container").click(function () {
-            event.stopPropagation();
-            if($("#filter-price-container").hasClass("filters__mobile__active")){
-                $(this).removeClass("filters__mobile__active");   
-            }
-            else{
-                $(this).addClass("filters__mobile__active");
-            }
-        });
+            $("#filter-price-container").unbind("click")
+            $("#filter-price-container").click(function () {
+                event.stopPropagation();
+                if($("#filter-price-container").hasClass("filters__mobile__active")){
+                    $(this).removeClass("filters__mobile__active");   
+                }
+                else{
+                    $(this).addClass("filters__mobile__active");
+                }
+            });
         }, 1000);
     }
 }
