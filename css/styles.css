@@ -468,7 +468,7 @@ textarea{
     z-index: 10;
     color: white;
     text-align: center;
-    font-size: 1.25rem;
+    font-size: 1rem;
 }
 
 .footer__link {
@@ -558,7 +558,7 @@ textarea{
     }
 
     .section__title {
-        text-align: start;
+        text-align: center;
     }
 
     .products__container {

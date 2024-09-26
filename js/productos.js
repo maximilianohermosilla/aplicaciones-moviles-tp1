@@ -2,8 +2,6 @@ import apiMercadoLibre from './services/apiMercadoLibre.js'
 import carritoService from './services/carritoService.js'
 import productoService from './services/productoService.js'
 import CardProducto from './components/cardProducto.js'
-import SelectOption from './components/select-option.js'
-import Link from './components/link.js'
 import LinkFilter from './components/link-filter.js'
 
 let categoriaPrincipal = 'MLA1648';
@@ -43,12 +41,39 @@ function getParamsFromHref(){
 function getParametroBusqueda(){
     let parametros = getParamsFromHref();
     console.log(parametros)
-    if(parametros != undefined && parametros != ""){
-        return parametros.replace("search=", "");
+    
+    let parametrosSplitted = parametros.split('&');
+    console.log(parametrosSplitted)
+
+    if (parametrosSplitted.length > 1){
+        let parametroBusqueda = "";
+        parametrosSplitted.forEach(element => {
+            console.log(element)
+            if(!element.includes("search")){  
+                filters += `&${element}`;
+                //filtrosSeleccionados.push(element.split('=')[1]);
+
+                console.log(filters)
+                console.log(filtrosSeleccionados)
+            }else{
+                parametroBusqueda = element.replace("search=", "");
+            }
+        });
+
+        console.log(parametroBusqueda)
+        return parametroBusqueda;
     }
     else{
-        return "";
+        if(parametros != undefined && parametros != ""){
+            if(parametros.includes("search")){
+                return parametros.replace("search=", "");
+            }
+        }
+        else{
+            return "";
+        }
     }
+    
 }
 
 async function init(){
