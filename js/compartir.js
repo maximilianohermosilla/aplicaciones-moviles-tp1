@@ -53,6 +53,18 @@ async function renderProductoCompartir(producto){
     $("#compartir-title").html("Compartir con un amigo");
     let productoContainer = document.getElementById("compartir-container");
     productoContainer.innerHTML = RenderCompartirProducto(producto);
+
+    const dialog = document.getElementById("dialog-back");
+    const cancelButton = document.getElementById("modal-cancel-back");
+    const confirmButton = document.getElementById("modal-confirm-back");
+    
+    confirmButton.addEventListener("click", () => {
+        history.back()
+    });
+    
+    cancelButton.addEventListener("click", () => {        
+        dialog.close();
+    });
     
     let buttonEnviar = document.getElementById("compartir-enviar");
     buttonEnviar.addEventListener('click', () =>{
@@ -63,9 +75,7 @@ async function renderProductoCompartir(producto){
     let buttonCancelar = document.getElementById("compartir-cancelar");
     buttonCancelar.addEventListener('click', () =>{
         event.preventDefault();
-        if (confirm("¿Desea cancelar y volver a la página anterior?") == true) {
-            history.back()
-        }
+        dialog.showModal();       
     })
 }
 

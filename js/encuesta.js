@@ -26,7 +26,19 @@ function initialConfig(){
             longhand: ['Enero', 'Febreo', 'Мarzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
         },
         },
-    });  
+    }); 
+    
+    const dialog = document.getElementById("dialog-back");
+    const cancelButton = document.getElementById("modal-cancel-back");
+    const confirmButton = document.getElementById("modal-confirm-back");
+    
+    confirmButton.addEventListener("click", () => {
+        history.back()
+    });
+    
+    cancelButton.addEventListener("click", () => {        
+        dialog.close();
+    });
 
     let buttonEnviar = document.getElementById("buttonEnviar");
     buttonEnviar.addEventListener('click', () =>{
@@ -37,9 +49,7 @@ function initialConfig(){
     let buttonCancelar = document.getElementById("buttonCancelar");
     buttonCancelar.addEventListener('click', () =>{
         event.preventDefault();
-        if (confirm("¿Desea cancelar y volver a la página anterior?") == true) {
-            history.back()
-        }
+        dialog.showModal();    
     })
 
     let buttonRestablecer = document.getElementById("buttonRestablecer");
@@ -57,14 +67,23 @@ function enviarEncuesta(){
         //alert(error);
     }
     else{
-        alert(`Datos:
+        const dialog = document.getElementById("dialog-encuesta");
+        const cancelButton = document.getElementById("modal-cancel-encuesta");
+        const dialogContent = document.getElementById("dialog-content");
+
+        dialog.showModal();
+        
+        cancelButton.addEventListener("click", () => {        
+            dialog.close();
+        });
+        dialogContent.textContent =`Datos:
             Nombre: ${nombre}
             Apellido: ${apellido}          
             Fecha de Nacimiento:  ${fechaNacimiento}
             Sexo: ${sexo}
             Valoración: ${valoracion}
             Email: ${email}
-            Comentario: ${comentario}`)
+            Comentario: ${comentario}`;
     }
 }
 

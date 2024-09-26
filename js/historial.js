@@ -21,12 +21,22 @@ function init(){
         historialOrdered.forEach(producto =>{ 
             historialContainer.innerHTML += RenderHistorial(producto);
         }) 
+
+        const dialog = document.getElementById("dialog-clear");
+        const cancelButton = document.getElementById("modal-cancel-clear");
+        const confirmButton = document.getElementById("modal-confirm-clear");
+        
+        confirmButton.addEventListener("click", () => {
+            historialService.Clearhistorial();
+            window.location.reload();   
+        });
+        
+        cancelButton.addEventListener("click", () => {        
+            dialog.close();
+        });
     
         $("#historial-clear").click(() => {
-            if (confirm("¿Está seguro de que desea vaciar el historial?") == true) {
-                historialService.Clearhistorial();
-                window.location.reload();            
-            }
+            dialog.showModal();           
         });
 
         onButtonCloseClick(document.querySelectorAll(".button__close"));
@@ -39,14 +49,26 @@ function parsearFecha(fechaProducto){
     return new Date(anio, mes -1, dia, ...hora.split(':').map(Number));
 }
 
-
 function onButtonCloseClick(elements){
     elements.forEach((element) => {
+
+        let idProducto = element.id.replace("close_", "");
+        const dialog = document.getElementById("dialog-"+idProducto);
+        const cancelButton = document.getElementById("modal-cancel-"+idProducto);
+        const confirmButton = document.getElementById("modal-confirm-"+idProducto);
+
         element.addEventListener('click', () =>{
-            if (confirm("¿Está seguro de que desea eliminar el producto del historial?") == true) {
-                deleteProduct(element.id.replace("close_", ""));
-            }
-        })
+            dialog.showModal();
+        });    
+        
+        confirmButton.addEventListener("click", () => {
+            deleteProduct(idProducto)
+            dialog.close();
+        });
+        
+        cancelButton.addEventListener("click", () => {        
+            dialog.close();
+        });
     });
 }
 

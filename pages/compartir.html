@@ -38,7 +38,7 @@
                         <p class="input__error" id="inputEmailDestino-required"></p>
                         <p class="input__error" id="inputEmailDestino-invalid"></p>
                     </div>
-                    <div class="form__container"></div>
+                    <div class="form__container">
                         <label for="inputComentario">Comentario:</label>
                         <textarea id="inputComentario" rows="10" cols="50"></textarea>
                     </div>
@@ -49,6 +49,18 @@
                 <button class="button__secondary" id="compartir-enviar">Enviar</button>
                 <button class="button__danger" id="compartir-cancelar">Cancelar</button>
             </div>
+
+            <dialog id="dialog-back">
+                <div class="dialog__container">
+                    <p>
+                        ¿Desea cancelar y volver a la página anterior?
+                    </p>
+                    <div class="container__center">
+                        <button class="button__danger" id="modal-cancel-back">Cancelar</button>
+                        <button class="button__secondary" id="modal-confirm-back">Confirmar</button>
+                    </div>
+                </div>
+            </dialog>
         </main>
 
         <footer class="footer__container">

@@ -17,6 +17,17 @@ export default function RenderHistorial(producto){
         <div class="historial__close">        
             <button class="button__close" id="close_${producto.id}">x</button>
         </div>
+        <dialog id="dialog-${producto.id}">
+            <div class="dialog__container">
+                <p>
+                    ¿Está seguro de que desea eliminar el producto del historial?
+                </p>
+                <div class="container__center">
+                    <button class="button__danger" id="modal-cancel-${producto.id}">Cancelar</button>
+                    <button class="button__secondary" id="modal-confirm-${producto.id}">Confirmar</button>
+                </div>
+            </div>
+        </dialog>
     </div>
     `;
 }

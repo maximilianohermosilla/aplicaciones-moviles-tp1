@@ -10,15 +10,36 @@ body {
     font-family: "Nunito", sans-serif;
 }
 
+dialog:-internal-dialog-in-top-layer::backdrop{
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+dialog{
+    border: 0;
+    border-radius: 5px;
+}
+
+.container__center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
 :focus-visible {
     outline: lightskyblue auto 1px;
+}
+
+textarea{
+    padding: 5px;
+    font-family: "Nunito", sans-serif;
 }
 
 .button__primary, .button__secondary, .button__danger, .button__pagination {
     display: inline-flex;
     align-items: center;
     font-weight: 600;
-    padding: 1rem;
+    padding: 0.75rem 1rem;
     border: 0;
     box-shadow: 2px 3px 4px rgba(0, 0, 0, 0.5);
     transition: 0.5s background-color;
@@ -119,7 +140,6 @@ body {
     width: 64px;
     height: 60px;
     border-radius: 5px;
-    box-shadow: 0px 0px 8px var(--second-color);
 }
 
 .header__logo:hover {
@@ -517,6 +537,14 @@ body {
 
 .products__ads{
     display: none;
+}
+
+.dialog__container{
+    padding-bottom: 1rem;
+}
+
+.dialog__container p{
+    white-space: pre-line;
 }
 
 @media screen and (min-width: 1024px) {

@@ -94,3 +94,14 @@
     color: red;
     margin: 0;
 }
+
+@media screen and (min-width: 1024px){
+    .buttons__encuesta{
+        justify-content: space-between;
+        flex-direction: row-reverse;
+    }
+
+    .buttons__encuesta button{
+        width: 30%;
+    }
+}
