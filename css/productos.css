@@ -83,6 +83,36 @@
     display: flex;
 }
 
+.section__filters{
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    padding-left: 1rem;
+}
+
+.section__filters li{
+    list-style-type: none;
+}
+
+.tag__filtro{
+    background-color: #FFF;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    padding: 5px 10px;
+    color: gray;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+.tag__filtro:hover{
+    cursor: pointer;
+    opacity: 0.5;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.9);
+}
+
+.tag__filtro .button__close{
+    font-size: 14px;
+}
+
 @media screen and (min-width: 1024px) {
     .productos__principal__container{
         display: flex;

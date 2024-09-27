@@ -3,6 +3,7 @@ import carritoService from './services/carritoService.js'
 import productoService from './services/productoService.js'
 import CardProducto from './components/cardProducto.js'
 import LinkFilter from './components/link-filter.js'
+import TagFiltro from './components/tagFiltro.js'
 
 let categoriaPrincipal = 'MLA1648';
 let carritoStorage = localStorage.getItem("productos")? JSON.parse(localStorage.getItem("productos")): [];
@@ -24,7 +25,16 @@ const getProductos = async (param) => {
         $("#productos-title").html("Resultados para: " + busquedaParam.replaceAll("%20", " "));
         $("#input-busqueda").val(busquedaParam.replaceAll("%20", " "));
         if(filtrosSeleccionados.length > 0){
-            $("#productos-filters").html("Filtros: " + filtrosSeleccionados.map(x => " " + x));
+            $("#productos-filters").html("Filtros: " + filtrosSeleccionados.map(x => " " + TagFiltro(x)).join(' '));
+
+            setTimeout(() => {
+                document.querySelectorAll(".tag__filtro").forEach(element => {
+                    element.addEventListener("click", function() {
+                        console.log(element.id);
+                        onFilterRemove(element);
+                    })
+                });
+            }, 500);
         }
         console.log(listaProductos)
         renderAds();
@@ -216,12 +226,21 @@ function onFilterClick(elements){
     elements.forEach((element) => {
         element.addEventListener('click', async () =>{            
             filters += element.id;
-            filtrosSeleccionados.push(element.innerHTML)
+            filtrosSeleccionados.push({ id: element.id, name: element.innerHTML })
             //console.log(filters)
             console.log(filtrosSeleccionados)
             listaProductos = await getProductos(busquedaParam);    
         })
     });
+}
+
+function onFilterRemove(element){
+    filters = filters.replace(element.id, "");
+    filtrosSeleccionados = filtrosSeleccionados.filter(filter => filter.id != element.id);
+    if(filtrosSeleccionados.length == 0){
+        $("#productos-filters").html("");
+    }
+    listaProductos = getProductos(busquedaParam);
 }
 
 function renderAds(){
