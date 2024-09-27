@@ -558,7 +558,8 @@ textarea{
     }
 
     .section__title {
-        text-align: center;
+        text-align: start;
+        padding: 0 1rem;
     }
 
     .products__container {

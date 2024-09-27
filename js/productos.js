@@ -143,7 +143,21 @@ function getFilters(productos){
             let links = linksOrdenados.map(item => LinkFilter(item, categoryFilter.id));
             setTimeout(() => {
                 $("#filter-category").html(links);
+                $("#filter-category-container").css("display", "flex");
+                $("#filter-category-container").unbind("click")
+                $("#filter-category-container").click(function () {
+                    event.stopPropagation();
+                    if($("#filter-category-container").hasClass("filters__mobile__active")){
+                        $(this).removeClass("filters__mobile__active");   
+                    }
+                    else{
+                        $(this).addClass("filters__mobile__active");
+                    }
+                });
             }, 500);
+        }
+        else{
+            $("#filter-category-container").css("display", "none");
         }
         
         if(brandFilter){
@@ -152,7 +166,21 @@ function getFilters(productos){
             let links = linksOrdenados.map(item => LinkFilter(item, brandFilter.id));
             setTimeout(() => {
                 $("#filter-brand").html(links);
-            }, 500);
+                $("#filter-brand-container").css("display", "flex");
+                $("#filter-brand-container").unbind("click")
+                $("#filter-brand-container").click(function () {
+                    event.stopPropagation();
+                    if($("#filter-brand-container").hasClass("filters__mobile__active")){
+                        $(this).removeClass("filters__mobile__active");   
+                    }
+                    else{
+                        $(this).addClass("filters__mobile__active");
+                    }
+                });
+                }, 500);
+        }
+        else{
+            $("#filter-brand-container").css("display", "none");
         }
         
         if(priceFilter){
@@ -161,44 +189,25 @@ function getFilters(productos){
             let links = linksOrdenados.map(item => LinkFilter(item, priceFilter.id));
             setTimeout(() => {
                 $("#filter-price").html(links);
+                $("#filter-price-container").css("display", "flex");
+                $("#filter-price-container").unbind("click")
+                $("#filter-price-container").click(function () {
+                    event.stopPropagation();
+                    if($("#filter-price-container").hasClass("filters__mobile__active")){
+                        $(this).removeClass("filters__mobile__active");   
+                    }
+                    else{
+                        $(this).addClass("filters__mobile__active");
+                    }
+                });
             }, 500);
         }
+        else{
+            $("#filter-category-container").css("display", "none");
+        price}
 
         setTimeout(() => {
             onFilterClick(document.querySelectorAll(".link__filter"));
-            
-            $("#filter-category-container").unbind("click")
-            $("#filter-category-container").click(function () {
-                event.stopPropagation();
-                if($("#filter-category-container").hasClass("filters__mobile__active")){
-                    $(this).removeClass("filters__mobile__active");   
-                }
-                else{
-                    $(this).addClass("filters__mobile__active");
-                }
-            });
-
-            $("#filter-brand-container").unbind("click")
-            $("#filter-brand-container").click(function () {
-                event.stopPropagation();
-                if($("#filter-brand-container").hasClass("filters__mobile__active")){
-                    $(this).removeClass("filters__mobile__active");   
-                }
-                else{
-                    $(this).addClass("filters__mobile__active");
-                }
-            });
-
-            $("#filter-price-container").unbind("click")
-            $("#filter-price-container").click(function () {
-                event.stopPropagation();
-                if($("#filter-price-container").hasClass("filters__mobile__active")){
-                    $(this).removeClass("filters__mobile__active");   
-                }
-                else{
-                    $(this).addClass("filters__mobile__active");
-                }
-            });
         }, 1000);
     }
 }
