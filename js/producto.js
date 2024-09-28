@@ -16,7 +16,6 @@ function getParamsFromHref(){
 
 function getParametro(){
     let parametros = getParamsFromHref();
-    console.log(parametros)
     if(parametros != undefined && parametros != ""){
         return parametros.split('&')[0];
     }
@@ -27,7 +26,6 @@ function getParametro(){
 
 const getProducto = async (param) => {
     producto = await apiMercadoLibre.GetItemPorId(param);
-    console.log(producto)
     setTimeout(() => {
         renderProducto(producto);
     }, 100);   
@@ -49,7 +47,6 @@ function init(){
 
 
 async function renderProducto(producto){
-    //console.log(productos)
     if (producto){
         let productoContainer = document.getElementById("producto-container");
         productoContainer.innerHTML = ProductoDetalle(producto);

@@ -50,7 +50,7 @@
 .filters__container li{
     list-style-type: none;
     margin: 0.25rem 0;
-    color: grey;
+    color: grey;    
 }
 
 .filters__container li:hover{
@@ -92,6 +92,7 @@
 
 .section__filters li{
     list-style-type: none;
+    margin: 0 0 0.5rem 0;
 }
 
 .tag__filtro{

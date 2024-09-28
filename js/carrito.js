@@ -2,8 +2,6 @@ import RenderCarrito from './components/carritoProductos.js'
 import carritoService from './services/carritoService.js'
 
 let carritoStorage = [];
-const dialog = document.getElementById("dialog-clear");
-
 
 function init(){    
     carritoStorage = localStorage.getItem("productos")? JSON.parse(localStorage.getItem("productos")): [];

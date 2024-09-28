@@ -15,7 +15,6 @@ function init(){
 }
 
 function addProduct(id){
-    console.log("add product de categoria")
     const product = listaProductos.find((element) => id == element.id);  
     carritoService.SaveProduct(product, 1);
     getProductosCategoria(categoriaParam);
@@ -58,12 +57,10 @@ async function getProductosCategoria(categoria){
 }
 
 async function renderProductos(productos){
-    //console.log(productos)
     let productosContainer = document.getElementById("productos-container");
     productosContainer.innerHTML = '';
     productos.forEach(producto =>{ 
         productosContainer.innerHTML += CardProducto(producto);
-        //getProductoEnCarrito(producto);
     })  
     productoService.OnCardClick(document.querySelectorAll(".product__card"));
     productoService.OnButtonClick(document.querySelectorAll(".button__agregar"), addProduct);

@@ -8,7 +8,6 @@ let listaProductos = [];
 async function getProductosCategoria(categoria){
     if(categoria != ""){
         let itemsPorCategoria = await apiMercadoLibre.Get(categoria, "4");
-        console.log(itemsPorCategoria);
 
         setTimeout(() => {
             listaProductos.push(...itemsPorCategoria.results);
@@ -28,7 +27,6 @@ async function renderProductos(productos, categoria){
 }
 
 function addProduct(id){
-    console.log("producto agregado en main")
     const product = listaProductos.find((element) => id == element.id);  
     carritoService.SaveProduct(product, 1);
 }

@@ -15,7 +15,6 @@ let listaProductos;
 
 const getProductos = async (param) => {
     let productos = await apiMercadoLibre.GetItems(categoriaPrincipal, param, 10, offset*10, filters);
-    console.log(productos)
     setTimeout(() => {
         let disabledButton = offset == 0? "disabled": "";
         $("#pagination-prev").prop("disabled", disabledButton);
@@ -30,13 +29,11 @@ const getProductos = async (param) => {
             setTimeout(() => {
                 document.querySelectorAll(".tag__filtro").forEach(element => {
                     element.addEventListener("click", function() {
-                        console.log(element.id);
                         onFilterRemove(element);
                     })
                 });
             }, 500);
         }
-        console.log(listaProductos)
         renderAds();
         window.scrollTo(0, 0);
 
@@ -49,28 +46,19 @@ function getParamsFromHref(){
 }
 
 function getParametroBusqueda(){
-    let parametros = getParamsFromHref();
-    console.log(parametros)
-    
+    let parametros = getParamsFromHref();    
     let parametrosSplitted = parametros.split('&');
-    console.log(parametrosSplitted)
 
     if (parametrosSplitted.length > 1){
         let parametroBusqueda = "";
         parametrosSplitted.forEach(element => {
-            console.log(element)
             if(!element.includes("search")){  
                 filters += `&${element}`;
-                //filtrosSeleccionados.push(element.split('=')[1]);
-
-                console.log(filters)
-                console.log(filtrosSeleccionados)
             }else{
                 parametroBusqueda = element.replace("search=", "");
             }
         });
 
-        console.log(parametroBusqueda)
         return parametroBusqueda;
     }
     else{
@@ -88,7 +76,6 @@ function getParametroBusqueda(){
 
 async function init(){
     busquedaParam = getParametroBusqueda();
-    console.log(busquedaParam)
     listaProductos = await getProductos(busquedaParam);
 
 
@@ -104,12 +91,10 @@ async function init(){
 }
 
 async function renderProductos(productos){
-    //console.log(productos)
     let productosContainer = document.getElementById("productos-container");
     productosContainer.innerHTML = '';
     productos.forEach(producto =>{ 
         productosContainer.innerHTML += CardProducto(producto);
-        //getProductoEnCarrito(producto);
     })  
     productoService.OnCardClick(document.querySelectorAll(".product__card"));
     productoService.OnButtonClick(document.querySelectorAll(".button__agregar"), addProduct);
@@ -142,10 +127,6 @@ function getFilters(productos){
         let categoryFilter = productos.available_filters.find(x => x.id == "category");
         let brandFilter = productos.available_filters.find(x => x.id == "BRAND");
         let priceFilter = productos.available_filters.find(x => x.id == "price");
-
-        console.log(categoryFilter)
-        console.log(brandFilter)
-        console.log(priceFilter)
 
         if(categoryFilter){
             $("#filter-category-title").html(categoryFilter.name + ` <img src="../img/icons/down-arrow-dark.png" width="12" alt="Down Arrow">`)
@@ -227,8 +208,6 @@ function onFilterClick(elements){
         element.addEventListener('click', async () =>{            
             filters += element.id;
             filtrosSeleccionados.push({ id: element.id, name: element.innerHTML })
-            //console.log(filters)
-            console.log(filtrosSeleccionados)
             listaProductos = await getProductos(busquedaParam);    
         })
     });

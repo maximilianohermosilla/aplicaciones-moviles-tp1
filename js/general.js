@@ -1,4 +1,3 @@
-import carritoService from './services/carritoService.js'
 import apiMercadoLibre from './services/apiMercadoLibre.js'
 import loaderHtml from './services/loaderHtml.js'
 import Link from './components/link.js'
@@ -51,7 +50,6 @@ setTimeout(() => {
     $("#nav-mobile").click(function () {
         event.stopPropagation();
         if($("#nav-mobile").hasClass("nav__mobile__active")){
-            console.log("Borrar")
             $(this).removeClass("nav__mobile__active");   
         }
         else{

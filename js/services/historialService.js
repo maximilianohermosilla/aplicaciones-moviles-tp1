@@ -2,8 +2,7 @@ let historialStorage = localStorage.getItem("productos_historial")? JSON.parse(l
 
 //Functions
 async function gethistorialStorage(){
-    historialStorage = await localStorage.getItem("productos_historial")? JSON.parse(localStorage.getItem("productos_historial")): [];  
-    console.log(historialStorage)  
+    historialStorage = await localStorage.getItem("productos_historial")? JSON.parse(localStorage.getItem("productos_historial")): [];
     return historialStorage;
 }
 
@@ -17,15 +16,13 @@ function addProduct(id){
 }
 
 function saveProduct(product){
-    console.log(product)
     let date = new Date();
     let fecha = date.toLocaleString("es-AR", { hour12: false });
     const repeat = historialStorage.some((repeatProduct) => repeatProduct.id === product.id);
-    console.log(repeat);
+
     if(repeat){
         clearProduct(product.id)
-    } 
-    console.log(historialStorage)
+    }
 
     saveLocalStorage(historialStorage);
     gethistorialStorage();
@@ -38,7 +35,6 @@ function saveProduct(product){
         fecha: fecha
     });
     
-    console.log(historialStorage)
     saveLocalStorage(historialStorage);    
 }
 

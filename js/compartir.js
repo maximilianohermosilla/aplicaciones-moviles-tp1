@@ -23,14 +23,9 @@ function getParametro(){
 
 const getProducto = async (param) => {
     producto = await apiMercadoLibre.GetItemPorId(param);
-    
-    setTimeout(() => {
-        //renderProducto(producto);
-    }, 100);   
 }
 
 function init(){
-    //getProductosCategoria(categoriaParam);
     productoId = getParametro();
     if(productoId == ""){
         renderNotFound();
