@@ -1,5 +1,4 @@
 export default function CardComponente(componente){
-    console.log(componente)
     return `
         <figure id="armado-${componente.id}" class="componente__figure">
             <img src="${componente.imagen}" alt="Icono ${componente.nombre}" class="componente__img"/>

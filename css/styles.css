@@ -214,6 +214,21 @@ textarea{
     height: 32px;
 }
 
+.nav__container img{
+    width: 24px;
+    height: 24px;
+}
+
+.nav__title:hover{
+    cursor: default;
+}
+
+
+.nav__title img{
+    width: 12px;
+    height: 12px;
+}
+
 .header__link:hover {
     opacity: 0.5;
 }
@@ -326,6 +341,11 @@ textarea{
     max-height: 60vh;
     margin-top: 4.8rem;
     margin-left: -160px;
+}
+
+.nav__list__mobile .header__link{
+    justify-content: space-between;
+    gap: 1rem;
 }
 
 .nav__link {
