@@ -14,7 +14,7 @@ let filtrosSeleccionados = [];
 let listaProductos;
 
 const getProductos = async (param) => {
-    let productos = await apiMercadoLibre.GetItems(categoriaPrincipal, param, 10, offset, filters);
+    let productos = await apiMercadoLibre.GetItems(categoriaPrincipal, param, 10, offset*10, filters);
     console.log(productos)
     setTimeout(() => {
         let disabledButton = offset == 0? "disabled": "";

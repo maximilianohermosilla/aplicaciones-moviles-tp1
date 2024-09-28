@@ -17,6 +17,7 @@ dialog:-internal-dialog-in-top-layer::backdrop{
 dialog{
     border: 0;
     border-radius: 5px;
+    max-width: 80%;
 }
 
 .container__center{
@@ -45,7 +46,7 @@ textarea{
     transition: 0.5s background-color;
     border-radius: 0.25rem;
     border: 1px solid transparent;
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
 
 .button__primary:hover, .button__secondary:hover, .button__danger:hover {

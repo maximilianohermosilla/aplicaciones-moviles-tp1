@@ -6,26 +6,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href='//fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
     <title>UNAJ PC Store</title>
     <link rel="icon" type="image/x-icon" href="../img/logo.ico">
     <link rel="stylesheet" href="../css/styles.css">
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1712551534278535"
-        crossorigin="anonymous"></script>
-    <script>
-        window.adsbygoogle = window.adsbygoogle || [];
-        var adBreak = adConfig = function (o) { adsbygoogle.push(o); }
-        adConfig({ preloadAdBreaks: 'on' });
-    </script>
-    <style>
-        .responsive_header_unit {
-            min-width: 150px;
-            min-height: 150px;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/armado-pc.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
 
 <body class="body__container">
@@ -34,25 +20,41 @@
     </header>
 
     <main class="main__container">
-        <section class="home__container responsive_header_unit" style="width: 100vw;">
-            <div id="afscontainer1"></div>
-            <div id="adsbygoogle"></div>
-            <div class="adsbygoogle"></div>
+        <div>
+            <h3 class="armado__container" id="armado-title">Armá tu PC</h3>     
+            <section class="armado__container componentes__container" id="componentes-container">
+                <!-- componentes -->
+            </section>
 
-            <ins class="adsbygoogle responsive_header_unit" style="display:block" data-ad-format="autorelaxed"
-                data-ad-client="ca-pub-1712551534278535" data-ad-slot="4107553047"
-                data-full-width-responsive="true"></ins>
-            <script>
-                window.adsbygoogle = window.adsbygoogle || [];
-                var adBreak = adConfig = function (o) { adsbygoogle.push(o); }
-                adConfig({ preloadAdBreaks: 'on' });
-            </script>
-        </section>
+            <h5 id="armado-categoria-title"></h5>
+            <section class="armado__container" id="armado-categoria-container">
+                <!-- productos -->
+            </section>
+            <section class="pagination__container" id="pagination-container">
+                <button class="button__pagination" id="pagination-prev"><img class="button__previous" src="../img/icons/down-arrow-dark.png" width="12" alt="Left Arrow"></button>
+                <p id="pagination-offset"></p>
+                <button class="button__pagination" id="pagination-next"><img class="button__next" src="../img/icons/down-arrow-dark.png" width="12" alt="Right Arrow"></button>
+            </section>
+        </div>
+        <div class="armado__container armado__acciones" id="armado-acciones">
+            <button class="button__secondary" id="armado-clear">FINALIZAR ARMADO</button>
+        </div>
+
+        <dialog id="dialog-armado">
+            <div class="dialog__container">
+                <p id="dialog-content">
+                    
+                </p>
+                <div class="container__center">
+                    <button class="button__danger" id="modal-cancel-armado">Cerrar</button>
+                </div>
+            </div>
+        </dialog>
     </main>
 
 </body>
 <!-- Scripts -->
 <script type="module" src="../js/general.js"></script>
-<!-- <script type="module" src="../js/armado-pc.js"></script> -->
+<script type="module" src="../js/armado-pc.js"></script>
 
 </html>
