@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,16 +38,27 @@
             </section>
         </div>
         <div class="armado__container armado__acciones" id="armado-acciones">
-            <button class="button__secondary" id="armado-clear">FINALIZAR ARMADO</button>
+            <button class="button__secondary" id="armado-confirm">FINALIZAR ARMADO</button>
         </div>
 
+        <dialog id="dialog-armado-confirm">
+            <div class="dialog__container">
+                <p id="dialog-content-confirm">
+                    
+                </p>
+                <div class="container__center">
+                    <button class="button__danger" id="modal-cancel-armado">Cancelar</button>
+                    <button class="button__secondary" id="modal-confirm-armado">Confirmar</button>
+                </div>
+            </div>
+        </dialog>
         <dialog id="dialog-armado">
             <div class="dialog__container">
                 <p id="dialog-content">
                     
                 </p>
                 <div class="container__center">
-                    <button class="button__danger" id="modal-cancel-armado">Cerrar</button>
+                    <button class="button__danger" id="modal-close-armado">Cerrar</button>
                 </div>
             </div>
         </dialog>

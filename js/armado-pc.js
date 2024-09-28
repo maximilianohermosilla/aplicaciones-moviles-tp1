@@ -1,7 +1,8 @@
 import componentes from '../js/utils/componentes-armado.js'
 import CardComponente from './components/card-componente.js'
-import apiMercadoLibre from './services/apiMercadoLibre.js'
 import ProductoArmado from './components/producto-armado.js'
+import apiMercadoLibre from './services/apiMercadoLibre.js'
+import carritoService from './services/carritoService.js'
 
 let filters = "";
 let offset = 0;
@@ -67,11 +68,10 @@ async function renderProductos(productos){
 
 function selectProduct(producto){
     if($(`#${producto.id}`).hasClass("armado___producto__selected")){
-        console.log(categoriaSelected)
-        console.log(categoriaSelected.id)
-        console.log(listaProductosSeleccionados.some(p => p.category_id == categoriaSelected.id.replace("armado-", "")));      
         $(`#${producto.id}`).removeClass("armado___producto__selected");
         listaProductosSeleccionados = listaProductosSeleccionados.filter(p => p.id != producto.id);
+
+        //si no existe ningun producto seleccionado de la misma categoria, la desmarco
         if(!listaProductosSeleccionados.some(p => p.category_id == categoriaSelected.id.replace("armado-", ""))){
             $(`#${categoriaSelected.id}`).removeClass("componente__selected");
         }
@@ -94,3 +94,56 @@ $("#pagination-next").on("click", async function(){
     offset++;
     listaProductos = await getProductos();
 });
+
+$("#armado-confirm").on("click", async function(){
+    let categoriasVacias = [];   
+    const dialog = document.getElementById("dialog-armado-confirm"); 
+    componentes.forEach(element => {
+        if(!$(`#armado-${element.id}`).hasClass("componente__selected")){
+            categoriasVacias.push(element);
+        }
+    });
+    if (categoriasVacias.length > 0){
+        $("#dialog-content-confirm").html("<strong>¿Desea finalizar el armado con las siguientes categorías sin elementos seleccionados?</strong> \n\n" + categoriasVacias.map(x => " " + x.nombre ));
+    }
+    else{
+        $("#dialog-content-confirm").html("¿Desea finalizar el armado?");
+    }    
+    dialog.showModal();   
+
+});
+
+const dialogConfirmacion = document.getElementById("dialog-armado-confirm"); 
+const dialog = document.getElementById("dialog-armado"); 
+const closeButton = document.getElementById("modal-close-armado");
+const cancelButton = document.getElementById("modal-cancel-armado");
+const confirmButton = document.getElementById("modal-confirm-armado"); 
+
+confirmButton.addEventListener("click", () => {
+    listaProductosSeleccionados.forEach(element => {
+        addProduct(element);        
+    });
+    dialogConfirmacion.close();
+
+    if(listaProductosSeleccionados.length > 0){
+        $("#dialog-content").html("<strong>Proceso finalizado. Se agregaron al carrito los siguientes productos:</strong> \n\n" + listaProductosSeleccionados.map(x => x.title + "\n\n").join(' '));
+    }
+    else{
+        $("#dialog-content").html("No se han encontrado productos seleccionados");
+    }
+    dialog.showModal();
+});
+
+cancelButton.addEventListener("click", () => {        
+    dialogConfirmacion.close();
+});
+
+closeButton.addEventListener("click", () => {        
+    dialog.close();
+});
+
+
+
+function addProduct(producto){
+    carritoService.SaveProduct(producto, 1);
+}

@@ -22,13 +22,13 @@
 .componentes__container {
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 1rem;
 }
 
 .componente__figure {
     display: grid;
     place-content: center;
-    width: 1.5rem;
+    width: 3rem;
     gap: 3px;
     border: 1px solid lightgrey;
     border-radius: 8px;
@@ -173,12 +173,13 @@
     }
 
     .componente__figure {
-        width: 7rem;
+        width: 6rem;
         padding: 1rem 0.5rem;
     }
 
     .componente__caption {
         display: block;
+        font-size: 0.75rem;
     }
 
 }
