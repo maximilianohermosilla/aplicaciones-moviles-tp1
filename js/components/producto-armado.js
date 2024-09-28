@@ -1,6 +1,6 @@
-export default function ProductoArmado(producto){
+export default function ProductoArmado(producto, multiple){
     return `
-    <div class="armado__producto" id="${producto.id}">
+    <div class="armado__producto ${multiple == true? 'multiple': ''}" id="${producto.id}">
         <div class="armado__img">
             <img cross-origin="use-credentials" id="producto-img-${producto.id}" src="${producto.thumbnail}" class="img__armado">
             <a href="../../pages/producto.html?${producto.id}"/> <img src="../../img/icons/detail_black.png" alt="Detalle icono" width="16" > Detalle</a>
@@ -13,7 +13,7 @@ export default function ProductoArmado(producto){
         <div class="armado__precio">
             <div class="armado__span__precio">$ ${(producto.price).toString()}</div>
         </div>
-        <div class="armado__close">        
+        <div class="armado__close">
             <button class="button__close" id="close_${producto.id}">x</button>
         </div>
         <dialog id="dialog-${producto.id}">

@@ -10,16 +10,73 @@ let listaProductos;
 let categoriaSelected;
 let listaProductosSeleccionados = [];
 
-$("#componentes-container").html(componentes.map(componente => CardComponente(componente)));
-// $(`#${categoriaSelected}`).addClass("componente__selected");
+function init(){    
+    $("#componentes-container").html(componentes.map(componente => CardComponente(componente)));
 
-setTimeout(() => {
-    document.querySelectorAll(".componente__figure").forEach(componente => {
-        $(`#${componente.id}`).on("click", function() {
-            selectCategoria(componente);
+    const dialog = document.getElementById("dialog-armado");
+    const dialogConfirmacion = document.getElementById("dialog-armado-confirm");
+
+    setTimeout(() => {
+        document.querySelectorAll(".componente__figure").forEach(componente => {
+            $(`#${componente.id}`).on("click", function() {
+                selectCategoria(componente);
+            });
         });
-    })    
-}, 1000);
+    }, 1000);    
+
+    const confirmButton = document.getElementById("modal-confirm-armado");
+    confirmButton.addEventListener("click", () => {
+        listaProductosSeleccionados.forEach(element => {
+            addProduct(element);        
+        });
+        dialogConfirmacion.close();
+
+        if(listaProductosSeleccionados.length > 0){
+            $("#dialog-content").html("<strong>Proceso finalizado. Se agregaron al carrito los siguientes productos:</strong> \n\n" + listaProductosSeleccionados.map(x => x.title + "\n\n").join(' '));
+        }
+        else{
+            $("#dialog-content").html("No se han encontrado productos seleccionados");
+        }
+        dialog.showModal();
+    });
+
+    const cancelButton = document.getElementById("modal-cancel-armado");
+    cancelButton.addEventListener("click", () => {        
+        dialogConfirmacion.close();
+    });
+
+    const closeButton = document.getElementById("modal-close-armado");
+    closeButton.addEventListener("click", () => {        
+        dialog.close();
+    });
+    
+    $("#pagination-prev").on("click", async function(){
+        offset--;
+        listaProductos = await getProductos();
+    });
+
+    $("#pagination-next").on("click", async function(){
+        offset++;
+        listaProductos = await getProductos();
+    });
+
+    $("#armado-confirm").on("click", async function(){
+        let categoriasVacias = [];
+        componentes.forEach(element => {
+            if(!$(`#armado-${element.id}`).hasClass("componente__selected")){
+                categoriasVacias.push(element);
+            }
+        });
+        if (categoriasVacias.length > 0){
+            $("#dialog-content-confirm").html("<strong>¿Desea finalizar el armado con las siguientes categorías sin elementos seleccionados?</strong> \n\n" + categoriasVacias.map(x => " " + x.nombre ));
+        }
+        else{
+            $("#dialog-content-confirm").html("¿Desea finalizar el armado?");
+        }    
+        dialogConfirmacion.showModal();   
+
+    });
+}
 
 function selectCategoria(categoria){
     componentes.forEach(element => {
@@ -45,14 +102,15 @@ const getProductos = async () => {
     }, 100);   
 }
 
-
 async function renderProductos(productos){
+    let categoriaMultiple = componentes.find(c => c.id == categoriaSelected.id.replace("armado-", ""));
     $("#armado-categoria-container").css("display", "flex");
     $("#pagination-container").css("display", "flex");
     let productosContainer = document.getElementById("armado-categoria-container");
     productosContainer.innerHTML = '';
+    console.log(categoriaMultiple);
     productos.forEach(producto =>{ 
-        productosContainer.innerHTML += ProductoArmado(producto);  
+        productosContainer.innerHTML += ProductoArmado(producto, categoriaMultiple.multiple);  
         if(listaProductosSeleccionados.some(p => p.id == producto.id)){
             $(`#${producto.id}`).addClass("armado___producto__selected");
         }      
@@ -65,7 +123,6 @@ async function renderProductos(productos){
     $("#pagination-offset").html((offset + 1).toString())
 }
 
-
 function selectProduct(producto){
     if($(`#${producto.id}`).hasClass("armado___producto__selected")){
         $(`#${producto.id}`).removeClass("armado___producto__selected");
@@ -77,6 +134,12 @@ function selectProduct(producto){
         }
     }
     else{
+        if(!$(`#${producto.id}`).hasClass("multiple")){
+            listaProductosSeleccionados = listaProductosSeleccionados.filter(p => p.category_id != categoriaSelected.id.replace("armado-", ""));          
+            listaProductos.forEach(element => {
+                $(`#${element.id}`).removeClass("armado___producto__selected");      
+            });
+        }
         $(`#${categoriaSelected.id}`).addClass("componente__selected");
         $(`#${producto.id}`).addClass("armado___producto__selected");
         listaProductosSeleccionados.push(producto);
@@ -85,65 +148,8 @@ function selectProduct(producto){
     console.log(listaProductosSeleccionados)
 }
 
-$("#pagination-prev").on("click", async function(){
-    offset--;
-    listaProductos = await getProductos();
-});
-
-$("#pagination-next").on("click", async function(){
-    offset++;
-    listaProductos = await getProductos();
-});
-
-$("#armado-confirm").on("click", async function(){
-    let categoriasVacias = [];   
-    const dialog = document.getElementById("dialog-armado-confirm"); 
-    componentes.forEach(element => {
-        if(!$(`#armado-${element.id}`).hasClass("componente__selected")){
-            categoriasVacias.push(element);
-        }
-    });
-    if (categoriasVacias.length > 0){
-        $("#dialog-content-confirm").html("<strong>¿Desea finalizar el armado con las siguientes categorías sin elementos seleccionados?</strong> \n\n" + categoriasVacias.map(x => " " + x.nombre ));
-    }
-    else{
-        $("#dialog-content-confirm").html("¿Desea finalizar el armado?");
-    }    
-    dialog.showModal();   
-
-});
-
-const dialogConfirmacion = document.getElementById("dialog-armado-confirm"); 
-const dialog = document.getElementById("dialog-armado"); 
-const closeButton = document.getElementById("modal-close-armado");
-const cancelButton = document.getElementById("modal-cancel-armado");
-const confirmButton = document.getElementById("modal-confirm-armado"); 
-
-confirmButton.addEventListener("click", () => {
-    listaProductosSeleccionados.forEach(element => {
-        addProduct(element);        
-    });
-    dialogConfirmacion.close();
-
-    if(listaProductosSeleccionados.length > 0){
-        $("#dialog-content").html("<strong>Proceso finalizado. Se agregaron al carrito los siguientes productos:</strong> \n\n" + listaProductosSeleccionados.map(x => x.title + "\n\n").join(' '));
-    }
-    else{
-        $("#dialog-content").html("No se han encontrado productos seleccionados");
-    }
-    dialog.showModal();
-});
-
-cancelButton.addEventListener("click", () => {        
-    dialogConfirmacion.close();
-});
-
-closeButton.addEventListener("click", () => {        
-    dialog.close();
-});
-
-
-
 function addProduct(producto){
     carritoService.SaveProduct(producto, 1);
 }
+
+init();
